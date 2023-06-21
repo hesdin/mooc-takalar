@@ -7,6 +7,7 @@ use App\Http\Controllers\InstructorController;
 use App\Http\Controllers\AdminDashboardController;
 use App\Http\Controllers\CourseCategoryController;
 use App\Http\Controllers\InstrukturDashboardController;
+use App\Http\Controllers\PagesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,9 +20,9 @@ use App\Http\Controllers\InstrukturDashboardController;
 |
 */
 
-Route::get('/', function () {
-    return view('user.layouts.index');
-});
+
+// User
+Route::get('/', [PagesController::class, 'home'])->name('home');
 
 Route::get('/login', [AuthController::class, 'login'])->name('login');
 Route::post('/login', [AuthController::class, 'loginProcess'])->name('loginProcess');

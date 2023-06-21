@@ -14,6 +14,11 @@ class CourseCategory extends Model
         'name'
     ];
 
+    public function courses()
+    {
+        return $this->hasMany(Course::class, 'category_id');
+    }
+
     protected  static  function  boot()
     {
         parent::boot();
