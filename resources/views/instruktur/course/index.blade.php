@@ -121,7 +121,7 @@
                       <!--end::Menu item-->
                       <!--begin::Menu item-->
                       <div class="menu-item px-3">
-                        <form id="delete-form-{{ $course->id }}" action="#" method="POST" class="d-inline">
+                        <form id="delete-form-{{ $course->id }}" action="{{ route('instruktur.courses.destroy', $course->id) }}" method="POST" class="d-inline">
                           @csrf
                           @method('DELETE')
                           <a href="#" class="menu-link px-3 showConfirm" data-name="{{ $course->name }}">Delete</a>
