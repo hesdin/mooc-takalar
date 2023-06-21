@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->uuid('uuid')->unique();
             $table->unsignedBigInteger('course_id');
+            $table->enum('test_type', ['pre', 'post']);
             $table->string('title');
             $table->timestamp('start_time')->nullable();
             $table->timestamp('end_time')->nullable();
