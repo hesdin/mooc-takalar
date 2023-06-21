@@ -32,4 +32,14 @@ class Course extends Model
     {
         return $this->belongsTo(Instructor::class);
     }
+
+    public function curriculum()
+    {
+        return $this->hasMany(Curriculum::class);
+    }
+
+    public function subcurriculum()
+    {
+        return $this->hasManyThrough(SubCurriculum::class, Curriculum::class);
+    }
 }
