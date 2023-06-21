@@ -56,10 +56,10 @@ class CurriculumController extends Controller
     //  * @param  int  $id
     //  * @return \Illuminate\Http\Response
     //  */
-    // public function show(Course $course, Curriculum $curriculum)
-    // {
-    //     return view('instruktur.curriculum.show');
-    // }
+    public function show(Course $course, Curriculum $curriculum)
+    {
+        return view('instruktur.curriculum.show');
+    }
 
     /**
      * Show the form for editing the specified resource.
