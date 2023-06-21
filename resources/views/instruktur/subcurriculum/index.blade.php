@@ -138,7 +138,7 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title">Tambah Kurikulum</h5>
+                        <h5 class="modal-title">Tambah Sub Kurikulum</h5>
 
                         <!--begin::Close-->
                         <div class="btn btn-icon btn-sm btn-active-light-primary ms-2" data-bs-dismiss="modal"
