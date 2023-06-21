@@ -161,7 +161,7 @@
                                 <img src="{{ asset('frontend/assets/img/avatars/avatar-1.jpg') }}" alt="..."
                                     class="avatar-img rounded-circle">
                             </div>
-                            <div class="media-body flex-grow-1">
+                            <div class="media-body flex-grow-1 mb-8">
                                 <div class="d-md-flex align-items-center">
                                     <div class="me-auto mb-md-0">
                                         <h5 class="mb-0">{{ $comment->guru->nama }}</h5>
@@ -171,7 +171,8 @@
                                 </div>
                                 <p class="line-height-md mb-2">{{ $comment->comment_text }}</p>
 
-                                <a href="{{ route('guru.mycourse.comment-replies', ['uuid' => $course->uuid, 'id' => $comment->id]) }}" class="btn btn-info py-0 mb-10">Reply</a>
+                                <a href="{{ route('guru.mycourse.comment-replies', ['uuid' => $course->uuid, 'id' => $comment->id]) }}" class="btn btn-info py-0">Reply</a>
+                                <span class="ms-3">{{ $comment->replies->count() }} balasan</span>
                             </div>
                         </li>
                     @endforeach
