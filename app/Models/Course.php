@@ -42,4 +42,14 @@ class Course extends Model
     {
         return $this->hasManyThrough(SubCurriculum::class, Curriculum::class);
     }
+
+    public function preTest()
+    {
+        return $this->hasOne(Quiz::class)->where('test_type', 'pre');
+    }
+
+    public function postTest()
+    {
+        return $this->hasOne(Quiz::class)->where('test_type', 'post');
+    }
 }

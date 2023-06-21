@@ -9,6 +9,9 @@ use App\Http\Controllers\CourseCategoryController;
 use App\Http\Controllers\CurriculumController;
 use App\Http\Controllers\InstrukturDashboardController;
 use App\Http\Controllers\PagesController;
+use App\Http\Controllers\PostTestController;
+use App\Http\Controllers\PreTestController;
+use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\SubCurriculumController;
 
 /*
@@ -44,5 +47,10 @@ Route::prefix('instruktur')->middleware(['auth:instruktur'])->name('instruktur.'
         'courses' => CourseController::class,
         'courses.curriculum' => CurriculumController::class,
         'courses.curriculum.subcurriculum' => SubCurriculumController::class,
+
+        'pre-test' => PreTestController::class,
+        'post-test' => PostTestController::class,
     ]);
+
+    Route::post('question', [QuestionController::class, 'store'])->name('question.store');
 });

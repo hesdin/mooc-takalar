@@ -94,7 +94,7 @@
                   </td>
 
                   <td>{{ Str::ucfirst($course->category->name) }}</td>
-                  <td>{{ $course->created_at->format('d-m-Y') }}</td>
+                  <td>{{ Carbon\Carbon::parse($course->created_at)->isoFormat('DD MMMM YYYY') }}</td>
                   <td class="text-end">
                     <a href="#" class="btn btn-light btn-active-light-primary btn-sm" data-kt-menu-trigger="click"
                       data-kt-menu-placement="bottom-end">Actions

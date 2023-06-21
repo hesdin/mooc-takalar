@@ -31,7 +31,7 @@
                             </span>
                             <!--end::Svg Icon-->
                             <input type="text" data-kt-filter="search"
-                                class="form-control form-control-solid w-250px ps-14" placeholder="Search Curriculum" />
+                                class="form-control form-control-solid w-250px ps-14" placeholder="Search Quiz" />
                         </div>
                         <!--end::Search-->
                     </div>
@@ -39,7 +39,7 @@
                     <!--begin::Card toolbar-->
                     <div class="card-toolbar flex-row-fluid justify-content-end gap-5">
                         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#kt_modal_1">
-                            Tambah Kurikulum
+                            Buat Pertanyaan
                         </button>
                     </div>
                     <!--end::Card toolbar-->
@@ -53,7 +53,8 @@
                         <thead>
                             <!--begin::Table row-->
                             <tr class="text-start text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
-                                <th class="min-w-200px">Title</th>
+                                <th class="min-w-100px">Question</th>
+                                <th class="min-w-200px">Correct Answer</th>
                                 <th class="min-w-70px">Created At</th>
                             </tr>
                             <!--end::Table row-->
@@ -61,30 +62,17 @@
                         <!--end::Table head-->
                         <!--begin::Table body-->
                         <tbody class="fw-bold text-gray-600">
-                            @foreach ($course->curriculum as $curriculum)
+                            @foreach ($quiz->question as $question)
                                 <!--begin::Table row-->
                                 <tr>
-                                    <!--begin::Category=-->
-                                    <td>
-                                        <div class="d-flex align-items-center">
-                                            <!--begin::Thumbnail-->
-                                            <a href="{{ route('instruktur.courses.curriculum.subcurriculum.index', ['course' => $course->id, 'curriculum' => $curriculum->id]) }}"
-                                                class="symbol symbol-50px">
-                                                <span class="symbol-label"
-                                                    style="background-image:url({{ asset('assets/media//stock/ecommerce/1.gif') }});"></span>
-                                            </a>
-                                            <!--end::Thumbnail-->
-                                            <div class="ms-5">
-                                                <!--begin::Title-->
-                                                <a href="{{ route('instruktur.courses.curriculum.subcurriculum.index', ['course' => $course->id, 'curriculum' => $curriculum->id]) }}"
-                                                    class="text-gray-800 text-hover-primary fs-5 fw-bolder"
-                                                    data-kt-ecommerce-product-filter="product_name">{{ $curriculum->title }}</a>
-                                                <!--end::Title-->
-                                            </div>
-                                        </div>
+                                    <td class="text-start pe-0">
+                                        <span class="fw-bolder text-dark">{{ $question->question_text }}</span>
                                     </td>
                                     <td class="text-start pe-0">
-                                        <span class="fw-bolder text-dark">{{ Carbon\Carbon::parse($curriculum->created_at)->isoFormat('DD MMMM YYYY') }}</span>
+                                        <span class="fw-bolder text-dark">{{ $question->correctAnswer->choice_text }}</span>
+                                    </td>
+                                    <td class="text-start pe-0">
+                                        <span class="fw-bolder text-dark">{{ Carbon\Carbon::parse($quiz->created_at)->isoFormat('DD MMMM YYYY') }}</span>
                                     </td>
                                     <!--begin::Action=-->
                                     <td class="text-end">
@@ -139,7 +127,7 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title">Tambah Kurikulum</h5>
+                        <h5 class="modal-title">Buat pertanyaan</h5>
 
                         <!--begin::Close-->
                         <div class="btn btn-icon btn-sm btn-active-light-primary ms-2" data-bs-dismiss="modal"
@@ -149,12 +137,29 @@
                         <!--end::Close-->
                     </div>
 
-                    <form action="{{ route('instruktur.courses.curriculum.store', $course->id) }}" method="post">
+                    <form action="{{ route('instruktur.question.store') }}" method="post">
                         @csrf
+                        <input type="hidden" name="id" value="{{ $quiz->id }}">
                         <div class="modal-body">
                             <div class="mb-10">
-                                <label for="title" class="required form-label">Judul</label>
-                                <input type="text" class="form-control form-control-solid" name="title" id="title" placeholder="" />
+                                <label for="question" class="required form-label">Pertanyaan</label>
+                                <input type="text" class="form-control" name="question" id="question" placeholder="" />
+                            </div>
+                            <div class="mb-10">
+                                <label for="correct" class="required form-label">Jawaban Benar</label>
+                                <input type="text" class="form-control" name="correct" id="correct" placeholder="" />
+                            </div>
+                            <div class="mb-10">
+                                <label for="answer" class="required form-label">Jawaban lain</label>
+                                <input type="text" class="form-control" name="answer[]" id="answer" placeholder="" />
+                            </div>
+                            <div class="mb-10">
+                                <label for="answer" class="required form-label">Jawaban lain</label>
+                                <input type="text" class="form-control" name="answer[]" id="answer" placeholder="" />
+                            </div>
+                            <div class="mb-10">
+                                <label for="answer" class="required form-label">Jawaban lain</label>
+                                <input type="text" class="form-control" name="answer[]" id="answer" placeholder="" />
                             </div>
                         </div>
 

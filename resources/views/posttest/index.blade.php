@@ -31,7 +31,7 @@
                             </span>
                             <!--end::Svg Icon-->
                             <input type="text" data-kt-filter="search"
-                                class="form-control form-control-solid w-250px ps-14" placeholder="Search Curriculum" />
+                                class="form-control form-control-solid w-250px ps-14" placeholder="Search Quiz" />
                         </div>
                         <!--end::Search-->
                     </div>
@@ -39,7 +39,7 @@
                     <!--begin::Card toolbar-->
                     <div class="card-toolbar flex-row-fluid justify-content-end gap-5">
                         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#kt_modal_1">
-                            Tambah Kurikulum
+                            Tambah Quiz
                         </button>
                     </div>
                     <!--end::Card toolbar-->
@@ -53,6 +53,7 @@
                         <thead>
                             <!--begin::Table row-->
                             <tr class="text-start text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
+                                <th class="min-w-100px">Course</th>
                                 <th class="min-w-200px">Title</th>
                                 <th class="min-w-70px">Created At</th>
                             </tr>
@@ -61,30 +62,19 @@
                         <!--end::Table head-->
                         <!--begin::Table body-->
                         <tbody class="fw-bold text-gray-600">
-                            @foreach ($course->curriculum as $curriculum)
+                            @foreach ($quizzes as $quiz)
                                 <!--begin::Table row-->
                                 <tr>
-                                    <!--begin::Category=-->
-                                    <td>
-                                        <div class="d-flex align-items-center">
-                                            <!--begin::Thumbnail-->
-                                            <a href="{{ route('instruktur.courses.curriculum.subcurriculum.index', ['course' => $course->id, 'curriculum' => $curriculum->id]) }}"
-                                                class="symbol symbol-50px">
-                                                <span class="symbol-label"
-                                                    style="background-image:url({{ asset('assets/media//stock/ecommerce/1.gif') }});"></span>
-                                            </a>
-                                            <!--end::Thumbnail-->
-                                            <div class="ms-5">
-                                                <!--begin::Title-->
-                                                <a href="{{ route('instruktur.courses.curriculum.subcurriculum.index', ['course' => $course->id, 'curriculum' => $curriculum->id]) }}"
-                                                    class="text-gray-800 text-hover-primary fs-5 fw-bolder"
-                                                    data-kt-ecommerce-product-filter="product_name">{{ $curriculum->title }}</a>
-                                                <!--end::Title-->
-                                            </div>
-                                        </div>
+                                    <td class="text-start pe-0">
+                                        <span class="fw-bolder text-dark">{{ $quiz->course->title }}</span>
                                     </td>
                                     <td class="text-start pe-0">
-                                        <span class="fw-bolder text-dark">{{ Carbon\Carbon::parse($curriculum->created_at)->isoFormat('DD MMMM YYYY') }}</span>
+                                        <a href="{{ route('instruktur.pre-test.show', ['pre_test' => $quiz->id]) }}" class="text-gray-800 text-hover-primary fs-5 fw-bolder">
+                                            {{ $quiz->title }}
+                                        </td>
+                                    </a>
+                                    <td class="text-start pe-0">
+                                        <span class="fw-bolder text-dark">{{ Carbon\Carbon::parse($quiz->created_at)->isoFormat('DD MMMM YYYY') }}</span>
                                     </td>
                                     <!--begin::Action=-->
                                     <td class="text-end">
@@ -139,7 +129,7 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title">Tambah Kurikulum</h5>
+                        <h5 class="modal-title">Tambah Quiz</h5>
 
                         <!--begin::Close-->
                         <div class="btn btn-icon btn-sm btn-active-light-primary ms-2" data-bs-dismiss="modal"
@@ -149,12 +139,22 @@
                         <!--end::Close-->
                     </div>
 
-                    <form action="{{ route('instruktur.courses.curriculum.store', $course->id) }}" method="post">
+                    <form action="{{ route('instruktur.post-test.store') }}" method="post">
                         @csrf
                         <div class="modal-body">
                             <div class="mb-10">
+                                <label for="course" class="required form-label">Course</label>
+                                <select class="form-select" aria-label="Select example" id="course" name="course" required>
+                                    <option value="" selected hidden>Pilih</option>
+                                    @foreach ($courses as $course)
+                                        <option value="{{ $course->id }}">{{ $course->title }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+
+                            <div class="mb-10">
                                 <label for="title" class="required form-label">Judul</label>
-                                <input type="text" class="form-control form-control-solid" name="title" id="title" placeholder="" />
+                                <input type="text" class="form-control" name="title" id="title" placeholder="" />
                             </div>
                         </div>
 
