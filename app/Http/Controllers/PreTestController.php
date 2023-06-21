@@ -99,7 +99,10 @@ class PreTestController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $preTest = Quiz::find($id);
+        $preTest->delete();
+
+        return redirect()->back()->with('success', 'Quiz berhasil dihapus');
     }
 
 

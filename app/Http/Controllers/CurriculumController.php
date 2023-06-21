@@ -6,6 +6,7 @@ use App\Models\Course;
 use App\Models\Curriculum;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 
 class CurriculumController extends Controller
 {
@@ -92,6 +93,14 @@ class CurriculumController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $curriculum = Curriculum::find($id);
+        foreach ($curriculum->subcurriculum as $subcurriculum) {
+            if (Str::contains($subcurriculum->content, ['.pdf', '.ppt', '.pptx'])) {
+                File::delete(public_path('doc/subcurriculum/'.$subcurriculum->content));
+            }
+        }
+        $curriculum->delete();
+
+        return redirect()->back()->with('success', 'Kurikulum berhasil dihapus');
     }
 }

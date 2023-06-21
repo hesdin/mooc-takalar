@@ -8,6 +8,7 @@ use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Models\CourseCategory;
 use PhpParser\Node\Stmt\Return_;
+use Illuminate\Support\Facades\File;
 
 class CourseController extends Controller
 {
@@ -113,6 +114,14 @@ class CourseController extends Controller
      */
     public function destroy(Course $course)
     {
-        //
+        $course = Course::find($course->id);
+        foreach ($course->subcurriculum as $subcurriculum) {
+            if (Str::contains($subcurriculum->content, ['.pdf', '.ppt', '.pptx'])) {
+                File::delete(public_path('doc/subcurriculum/'.$subcurriculum->content));
+            }
+        }
+        $course->delete();
+
+        return redirect()->back()->with('success', 'Kursus berhasil dihapus');
     }
 }
