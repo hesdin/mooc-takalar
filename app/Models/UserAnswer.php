@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class QuizResult extends Model
+class UserAnswer extends Model
 {
     use HasFactory;
 
@@ -17,5 +17,15 @@ class QuizResult extends Model
     public function quiz()
     {
         return $this->belongsTo(Quiz::class);
+    }
+
+    public function question()
+    {
+        return $this->belongsTo(Question::class);
+    }
+
+    public function selectedChoice()
+    {
+        return $this->belongsTo(AnswerChoice::class);
     }
 }
