@@ -39,7 +39,7 @@
         <p class="me-xl-13 mb-5">{{ $course->sub_title }}</p>
 
         <!-- COURSE META
-                                                                                                                                                                                                                          ================================================== -->
+                                                                                                                                                                                                                                ================================================== -->
         <div class="d-md-flex align-items-center mb-5">
           <div class="border rounded-circle d-inline-block mb-4 mb-md-0 me-md-6 me-lg-4 me-xl-6">
             <div class="p-2">
@@ -59,7 +59,7 @@
           </div>
         </div>
         <!-- COURSE INFO TAB
-                                                                                                                                                                                                                          ================================================== -->
+                                                                                                                                                                                                                                ================================================== -->
         <div class="border rounded shadow p-3 mb-6">
           <ul id="pills-tab" class="nav nav-pills course-tab-v2 h5 mb-0 flex-nowrap overflow-auto" role="tablist">
             <li class="nav-item">
@@ -241,7 +241,7 @@
 
       <div class="col-lg-4">
         <!-- SIDEBAR FILTER
-                                                                                                                                                                                                                          ================================================== -->
+                                                                                                                                                                                                                                ================================================== -->
         <div class="d-block rounded border p-2 shadow mb-6">
           <a href="#" class="d-block sk-thumbnail rounded mb-1" data-fancybox="">
             <img class="rounded shadow-light-lg" src="{{ asset('storage/images/course/' . $course->image) }}"
@@ -276,7 +276,8 @@
               <span class="ms-2">2 days left at this price!</span>
             </div>
 
-            <button class="btn btn-orange btn-block mb-6" type="button" name="button">ENROLL</button>
+            <a href="{{ route('guru.enrollment', ['uuid' => $course->uuid]) }}" class="btn btn-orange btn-block mb-6"
+              type="button" name="button">ENROLL</a>
 
             <ul class="list-group list-group-flush">
               <li class="list-group-item d-flex align-items-center py-3">

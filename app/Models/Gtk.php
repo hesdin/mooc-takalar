@@ -11,4 +11,9 @@ class Gtk extends Authenticatable
     use HasFactory;
 
     protected $table = 'gtk';
+
+    public function enrollments()
+    {
+        return $this->hasMany(Enrollment::class);
+    }
 }

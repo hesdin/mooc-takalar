@@ -14,7 +14,6 @@ class AuthController extends Controller
 
     public function loginProcess(Request $request)
     {
-
         $credentials = $request->validate([
             'username' => ['required'],
             'password' => ['required'],
@@ -30,11 +29,20 @@ class AuthController extends Controller
         }
 
         if ($guard) {
-            return redirect()->intended("/$guard/dashboard");
+            $intendedUrl = "/$guard/dashboard";
+            if (session()->has('url.intended')) {
+                $intendedUrl = session('url.intended');
+            }
+            if (strpos($intendedUrl, 'enrollment') !== false) {
+                return redirect()->intended($intendedUrl);
+            } else {
+                return redirect()->intended("$guard/dashboard");
+            }
         }
 
         return redirect('/login')->with('error', 'Invalid credentials');
     }
+
 
     public function logout(Request $request)
     {
