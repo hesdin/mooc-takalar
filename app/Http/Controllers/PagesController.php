@@ -31,10 +31,11 @@ class PagesController extends Controller
         return view('user.pages.home', compact('categories', 'all_courses', 'latest_courses', 'instructors'));
     }
 
-    public function courseDetail($id)
+    public function courseDetail($uuid)
     {
-        // Menggunakan ID kursus untuk mencari kursus berdasarkan UUID
-        $course = Course::where('id', $id)->first();
+        // Menggunakan UUID kursus untuk mencari kursus berdasarkan UUID
+        $course = Course::where('uuid', $uuid)->first();
+
 
         // Jika kursus ditemukan, tampilkan data ke view
         if ($course) {

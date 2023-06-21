@@ -78,7 +78,8 @@
                 <div class="card border shadow p-2 sk-fade">
                   <!-- Image -->
                   <div class="card-zoom position-relative">
-                    <a href="{{ route('course.detail', ['id' => $course->id]) }}" class="card-img sk-thumbnail d-block">
+                    <a href="{{ route('course.detail', ['uuid' => $course->uuid]) }}"
+                      class="card-img sk-thumbnail d-block">
                       <img class="rounded shadow-light-lg" src="{{ asset('storage/images/course/' . $course->image) }}"
                         alt="...">
                     </a>
@@ -94,12 +95,12 @@
                     </a>
 
                     <!-- Preheading -->
-                    <a href="{{ route('course.detail', ['id' => $course->id]) }}"><span
+                    <a href="{{ route('course.detail', ['uuid' => $course->uuid]) }}"><span
                         class="mb-1 d-inline-block text-gray-800">{{ Str::ucfirst($course->category->name) }}</span></a>
 
                     <!-- Heading -->
                     <div class="position-relative">
-                      <a href="{{ route('course.detail', ['id' => $course->id]) }}" class="d-block stretched-link">
+                      <a href="{{ route('course.detail', ['uuid' => $course->uuid]) }}" class="d-block stretched-link">
                         <h4 class="line-clamp-2 h-md-48 h-lg-58 me-md-6 me-lg-10 me-xl-4 mb-2">
                           {{ Str::ucfirst($course->title) }}</h4>
                       </a>
@@ -397,7 +398,7 @@
   </section>
 
   <!-- INSTRUCTORS
-                                                                                                                                                                                            ================================================== -->
+                                                                                                                                                                                                  ================================================== -->
   <section class="py-5 py-md-8 bg-white">
     <div class="container container-wd">
       <div class="row align-items-end mb-3 mb-md-5">
@@ -455,7 +456,7 @@
   </section>
 
   <!-- FEATURES GENERAL
-                                                                                                                                                                                            ================================================== -->
+                                                                                                                                                                                                  ================================================== -->
   <section class="py-5 py-md-8 bg-white">
     <div class="container container-wd">
       <div class="row align-items-center mb-6">

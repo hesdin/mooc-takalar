@@ -28,7 +28,7 @@ use App\Http\Controllers\SubCurriculumController;
 
 // User
 Route::get('/', [PagesController::class, 'home'])->name('home');
-Route::get('/course-detail', [PagesController::class, 'courseDetail'])->name('course.detail');
+Route::get('/course-detail/{uuid}', [PagesController::class, 'courseDetail'])->name('course.detail');
 
 Route::get('/login', [AuthController::class, 'login'])->name('login');
 Route::post('/login', [AuthController::class, 'loginProcess'])->name('loginProcess');
