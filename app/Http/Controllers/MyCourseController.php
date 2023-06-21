@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Course;
 use App\Models\Gtk;
 use App\Models\Quiz;
 use App\Models\Course;
@@ -25,8 +26,15 @@ class MyCourseController extends Controller
     public function myCourseDetail($uuid)
     {
         $course = Course::where('uuid', $uuid)->first();
+
+        return view('user.my_course_detail', compact('course'));
+    }
+
+    public function myCourseDetail($uuid)
+    {
+        $course = Course::where('uuid', $uuid)->first();
         // dd($course->id);
-        $result = Quiz::where('course_id', $course->id)->where('test_type', 'pre')->whereHas('result', function($query) {
+        $result = Quiz::where('course_id', $course->id)->where('test_type', 'pre')->whereHas('result', function ($query) {
             return $query->where('user_id', 1);
         })->first();
 

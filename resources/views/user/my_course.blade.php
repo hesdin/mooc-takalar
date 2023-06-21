@@ -31,8 +31,9 @@
             <div class="card border shadow p-2 rounded-lg lift sk-fade">
               <!-- Image -->
               <div class="card-zoom position-relative">
-                <a href="{{ route('guru.mycourse.detail', $enrollment->course->uuid) }}" class="card-img d-block sk-thumbnail img-ratio-3"><img
-                    class="rounded shadow-light-lg img-fluid"
+                <a href="{{ route('guru.mycourse.detail', ['uuid' => $enrollment->course->uuid]) }}
+"
+                  class="card-img d-block sk-thumbnail img-ratio-3"><img class="rounded shadow-light-lg img-fluid"
                     src="{{ asset('storage/images/course/' . $enrollment->course->image) }}" alt="..."></a>
 
                 <a href="#"
@@ -45,7 +46,9 @@
               <div class="card-footer px-2 pb-0 pt-4">
                 <ul class="nav mx-n3 mb-3">
                   <li class="nav-item px-3">
-                    <a href="{{ route('guru.mycourse.detail', $enrollment->course->uuid) }}" class="d-flex align-items-center text-gray-800">
+                    <a href="{{ route('guru.mycourse.detail', ['uuid' => $enrollment->course->uuid]) }}
+"
+                      class="d-flex align-items-center text-gray-800">
                       <div class="me-3 d-flex">
                         <!-- Icon -->
                         <svg width="15" height="15" viewBox="0 0 15 15" xmlns="http://www.w3.org/2000/svg">
@@ -59,7 +62,9 @@
                     </a>
                   </li>
                   <li class="nav-item px-3">
-                    <a href="{{ route('guru.mycourse.detail', $enrollment->course->uuid) }}" class="d-flex align-items-center text-gray-800">
+                    <a href="{{ route('guru.mycourse.detail', ['uuid' => $enrollment->course->uuid]) }}
+"
+                      class="d-flex align-items-center text-gray-800">
                       <div class="me-2 d-flex">
                         <!-- Icon -->
                         <svg width="15" height="15" viewBox="0 0 15 15" xmlns="http://www.w3.org/2000/svg">
@@ -77,7 +82,8 @@
                 </ul>
 
                 <!-- Heading -->
-                <a href="{{ route('guru.mycourse.detail', $enrollment->course->uuid) }}" class="d-block">
+                <a href="{{ route('guru.mycourse.detail', ['uuid' => $enrollment->course->uuid]) }}
+" class="d-block">
                   <h5 class="line-clamp-2 h-48 h-lg-52">{{ $enrollment->course->title }}</h5>
                 </a>
               </div>
