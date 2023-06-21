@@ -23,12 +23,7 @@ class MyCourseController extends Controller
         return view('user.my_course', compact('enrollments'));
     }
 
-    public function myCourseDetail($uuid)
-    {
-        $course = Course::where('uuid', $uuid)->first();
 
-        return view('user.my_course_detail', compact('course'));
-    }
 
     public function myCourseDetail($uuid)
     {
@@ -39,8 +34,7 @@ class MyCourseController extends Controller
         })->first();
 
         if ($result) {
-            dd("SADGE");
-            return view('user.pages.course_detail');
+            return view('user.my_course_detail', compact('course'));
         }
 
         $data = [
