@@ -9,6 +9,8 @@ class Curriculum extends Model
 {
     use HasFactory;
 
+    protected $table = 'curriculums';
+
     public function course()
     {
         return $this->belongsTo(Cource::class);

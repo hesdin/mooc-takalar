@@ -60,16 +60,15 @@ class CourseController extends Controller
         }
 
         $save = $course->save();
-        dd('save');
 
         if ($save) {
             // Redirect atau response JSON dengan pesan sukses
-            return redirect()->route('courses.show', $course->id)->with('success', 'Course created successfully');
+            return redirect()->route('instruktur.courses.curriculum.index', $course->id)->with('success', 'Course created successfully');
+
         }
 
-
-        // Redirect atau response JSON dengan pesan sukses
-        return redirect()->route('courses.show', $course->id)->with('success', 'Course created successfully');
+        // Redirect atau response JSON dengan pesan gagal
+        return redirect()->route('courses.index', $course->id)->with('failed', 'Create course failed');
     }
 
     /**

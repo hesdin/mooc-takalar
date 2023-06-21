@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class SubCurriculum extends Model
 {
     use HasFactory;
+    protected $table = 'sub_curriculums';
 
     public function curriculum()
     {

@@ -6,8 +6,10 @@ use App\Http\Controllers\CourseController;
 use App\Http\Controllers\InstructorController;
 use App\Http\Controllers\AdminDashboardController;
 use App\Http\Controllers\CourseCategoryController;
+use App\Http\Controllers\CurriculumController;
 use App\Http\Controllers\InstrukturDashboardController;
 use App\Http\Controllers\PagesController;
+use App\Http\Controllers\SubCurriculumController;
 
 /*
 |--------------------------------------------------------------------------
@@ -38,5 +40,9 @@ Route::prefix('admin')->middleware(['auth:admin'])->name('admin.')->group(functi
 // Instruktur Routes
 Route::prefix('instruktur')->middleware(['auth:instruktur'])->name('instruktur.')->group(function () {
     Route::get('/dashboard', [InstrukturDashboardController::class, 'index'])->name('dashboard');
-    Route::resource('courses', CourseController::class);
+    Route::resources([
+        'courses' => CourseController::class,
+        'courses.curriculum' => CurriculumController::class,
+        'courses.curriculum.subcurriculum' => SubCurriculumController::class,
+    ]);
 });

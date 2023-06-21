@@ -86,7 +86,7 @@
                     <!--end::Thumbnail-->
                     <!--begin::User details-->
                     <div class="d-flex flex-column">
-                      <a href="#"
+                      <a href="{{ route('instruktur.courses.curriculum.index', ['course' => $course->id]) }}"
                         class="text-gray-800 text-hover-primary fs-6 fw-bolder mb-1">{{ Str::ucfirst($course->title) }}</a>
                       <span>{{ $course->sub_title }}</span>
                     </div>
