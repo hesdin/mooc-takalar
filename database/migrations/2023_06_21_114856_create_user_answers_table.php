@@ -31,7 +31,7 @@ return new class extends Migration
             $table->foreign('question_id')->references('id')->on('questions')
             ->onUpdate('cascade')
             ->onDelete('cascade');
-            $table->foreign('selected_choice_id')->references('id')->on('questions')
+            $table->foreign('selected_choice_id')->references('id')->on('answer_choices')
             ->onUpdate('cascade')
             ->onDelete('cascade');
         });
