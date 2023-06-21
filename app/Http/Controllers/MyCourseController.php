@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Comment;
+use App\Models\CommentReply;
 use App\Models\Course;
 use App\Models\Gtk;
 use App\Models\Quiz;
@@ -76,5 +78,37 @@ class MyCourseController extends Controller
         $result->save();
 
         return redirect()->back()->with('success', 'Pre test telah selesai');
+    }
+
+    public function myCourseComment(Request $request)
+    {
+        $komentar = new Comment();
+        $komentar->user_id = auth()->user()->id;
+        $komentar->course_id = $request->course;
+        $komentar->curriculum_id = $request->curriculum;
+        $komentar->comment_text = $request->content;
+        $komentar->save();
+
+        return redirect()->back()->with('commented', 'Komentar telah terpublish');
+    }
+
+    public function myCourseCommentReplies($uuid, $id)
+    {
+        $data = [
+            'course' => Course::where('uuid', $uuid)->first(),
+            'comment' => Comment::find($id),
+        ];
+        return view('user.comment', $data);
+    }
+
+    public function myCourseCommentReply(Request $request, $uuid, $id)
+    {
+        $komentar = new CommentReply();
+        $komentar->user_id = auth()->user()->id;
+        $komentar->comment_id = $id;
+        $komentar->comment_text = $request->content;
+        $komentar->save();
+
+        return redirect()->back()->with('commented', 'Komentar telah terpublish');
     }
 }

@@ -28,6 +28,11 @@ class Course extends Model
         return $this->belongsTo(CourseCategory::class);
     }
 
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
+
     public function instructor()
     {
         return $this->belongsTo(Instructor::class);

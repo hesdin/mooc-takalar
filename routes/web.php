@@ -42,6 +42,9 @@ Route::prefix('guru')->middleware(['auth:guru'])->name('guru.')->group(function 
     Route::get('/my-course', [MyCourseController::class, 'myCourse'])->name('mycourse');
     Route::get('/my-course/{uuid}', [MyCourseController::class, 'myCourseDetail'])->name('mycourse.detail');
     Route::post('/my-course/{uuid}/pre-test', [MyCourseController::class, 'myCoursePreTest'])->name('mycourse.pre_test');
+    Route::post('/my-course/{uuid}/comment', [MyCourseController::class, 'myCourseComment'])->name('mycourse.comment');
+    Route::get('/my-course/{uuid}/comment/{id}', [MyCourseController::class, 'myCourseCommentReplies'])->name('mycourse.comment-replies');
+    Route::post('/my-course/{uuid}/comment/{id}', [MyCourseController::class, 'myCourseCommentReply'])->name('mycourse.comment-reply');
 
     Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('dashboard');
 });
