@@ -20,7 +20,7 @@ use App\Http\Controllers\InstrukturDashboardController;
 */
 
 Route::get('/', function () {
-    return redirect()->route('login');
+    return view('user.layouts.index');
 });
 
 Route::get('/login', [AuthController::class, 'login'])->name('login');

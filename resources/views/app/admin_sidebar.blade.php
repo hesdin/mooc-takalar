@@ -156,11 +156,11 @@
           </span>
           <div class="menu-sub menu-sub-accordion">
             <div class="menu-item">
-              <a class="menu-link" href="../../demo15/dist/index.html">
+              <a class="menu-link" href="{{ route('admin.course-categories.index') }}">
                 <span class="menu-bullet">
                   <span class="bullet bullet-dot"></span>
                 </span>
-                <span class="menu-title">Multipurpose</span>
+                <span class="menu-title">Course Category</span>
               </a>
             </div>
             <div class="menu-item">
@@ -221,9 +221,6 @@
             </div>
           </div>
         </div>
-
-
-
 
       </div>
       <!--end::Menu-->

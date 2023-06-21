@@ -60,6 +60,7 @@ class CourseController extends Controller
         }
 
         $save = $course->save();
+        dd('save');
 
         if ($save) {
             // Redirect atau response JSON dengan pesan sukses
