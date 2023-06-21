@@ -1,9 +1,9 @@
 @extends('app.index')
 
 @section('content')
-  <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+  <div class="content d-flex flex-column flex-column-fluid pt-0" id="kt_content">
     <!--begin::Container-->
-    <div class="container-fluid" id="kt_content_container">
+    <div class="container-fluid pt-0" id="kt_content_container">
       <!--begin::Row-->
       <div class="row g-5 g-lg-10">
         <!--begin::Col-->

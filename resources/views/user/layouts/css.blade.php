@@ -9,6 +9,8 @@
 <link rel="stylesheet" href="{{ asset('frontend/assets/libs/jarallax/dist/jarallax.css') }}">
 <link rel="stylesheet" href="{{ asset('frontend/assets/libs/quill/dist/quill.core.css') }}">
 
+@stack('css')
+
 <!-- Map -->
 <link href='../../../api.mapbox.com/mapbox-gl-js/v0.53.0/mapbox-gl.css' rel='stylesheet' />
 

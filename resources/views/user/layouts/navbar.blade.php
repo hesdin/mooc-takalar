@@ -1,4 +1,4 @@
-<header class="navbar navbar-expand-xl navbar-light">
+<header class="navbar navbar-expand-xl navbar-light py-0">
   <div class="container container-wd">
 
     <!-- Brand -->
@@ -539,21 +539,6 @@
           </div> <!-- / .row -->
         </li>
 
-
-        <li class="nav-item">
-          <a class="nav-link text-dark px-xl-4" id="navbarShop" data-bs-toggle="dropdown" href="#"
-            aria-haspopup="true" aria-expanded="false">
-            Kontak
-          </a>
-        </li>
-
-        <li class="nav-item">
-          <a class="nav-link text-dark px-xl-4" id="navbarDocumentation" data-bs-toggle="dropdown" href="#"
-            aria-haspopup="true" aria-expanded="false">
-            Tentang Kami
-          </a>
-
-        </li>
       </ul>
     </div>
 

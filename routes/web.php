@@ -28,6 +28,7 @@ use App\Http\Controllers\SubCurriculumController;
 
 // User
 Route::get('/', [PagesController::class, 'home'])->name('home');
+Route::get('/course-detail', [PagesController::class, 'courseDetail'])->name('course.detail');
 
 Route::get('/login', [AuthController::class, 'login'])->name('login');
 Route::post('/login', [AuthController::class, 'loginProcess'])->name('loginProcess');
@@ -35,7 +36,7 @@ Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 
 // Route Group Middleware
 Route::prefix('admin')->middleware(['auth:admin'])->name('admin.')->group(function () {
-    Route::get('/dashboard', [AdminDashboardController::class, 'index']);
+    Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('dashboard');
     Route::resource('/course-categories', CourseCategoryController::class);
     Route::resource('/instructors', InstructorController::class);
 });

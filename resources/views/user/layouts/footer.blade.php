@@ -1,6 +1,6 @@
 <footer class="py-8 pt-md-11 position-relative bg-white">
   <div class="position-absolute bottom-0 left-0 shape-flip-both">
-    <img src="assets/img/illustrations/illustration-7.svg" class="img-fluid" alt="...">
+    <img src="{{ asset('frontend/assets/img/illustrations/illustration-7.svg') }}" class="img-fluid" alt="...">
   </div>
 
   <div class="container container-wd">

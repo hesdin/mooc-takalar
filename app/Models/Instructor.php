@@ -32,4 +32,9 @@ class Instructor extends Authenticatable
             $model->uuid = (string) Str::uuid();
         });
     }
+
+    public function courses()
+    {
+        return $this->hasMany(Course::class, 'category_id');
+    }
 }

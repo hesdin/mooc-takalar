@@ -43,7 +43,6 @@ class AuthController extends Controller
         } elseif (Auth::guard('guru')->check()) {
             Auth::guard('guru')->logout();
         } elseif (Auth::guard('instruktur')->check()) {
-            dd('ins');
             Auth::guard('instruktur')->logout();
         }
 

@@ -24,8 +24,8 @@
       data-kt-scroll-wrappers="#kt_aside, #kt_aside_menu, #kt_aside_menu_wrapper" data-kt-scroll-offset="0">
       <!--begin::Menu-->
       <div class="menu menu-column menu-rounded fw-bold" id="#kt_aside_menu" data-kt-menu="true">
-        <div data-kt-menu-trigger="click" class="menu-item">
-          <span class="menu-link">
+        <div class="menu-item">
+          <a class="menu-link" href="{{ route('admin.dashboard') }}">
             <span class="menu-icon">
               <!--begin::Svg Icon | path: icons/duotune/arrows/arr001.svg-->
               <span class="svg-icon svg-icon-5">
@@ -43,75 +43,8 @@
               </span>
               <!--end::Svg Icon-->
             </span>
-            <span class="menu-title">Dashboards</span>
-            <span class="menu-arrow"></span>
-          </span>
-          <div class="menu-sub menu-sub-accordion">
-            <div class="menu-item">
-              <a class="menu-link" href="../../demo15/dist/index.html">
-                <span class="menu-bullet">
-                  <span class="bullet bullet-dot"></span>
-                </span>
-                <span class="menu-title">Multipurpose</span>
-              </a>
-            </div>
-            <div class="menu-item">
-              <a class="menu-link" href="../../demo15/dist/dashboards/ecommerce.html">
-                <span class="menu-bullet">
-                  <span class="bullet bullet-dot"></span>
-                </span>
-                <span class="menu-title">eCommerce</span>
-              </a>
-            </div>
-            <div class="menu-item">
-              <a class="menu-link" href="../../demo15/dist/dashboards/store-analytics.html">
-                <span class="menu-bullet">
-                  <span class="bullet bullet-dot"></span>
-                </span>
-                <span class="menu-title">Store Analytics</span>
-              </a>
-            </div>
-            <div class="menu-item">
-              <a class="menu-link" href="../../demo15/dist/dashboards/logistics.html">
-                <span class="menu-bullet">
-                  <span class="bullet bullet-dot"></span>
-                </span>
-                <span class="menu-title">Logistics</span>
-              </a>
-            </div>
-            <div class="menu-item">
-              <a class="menu-link" href="../../demo15/dist/dashboards/delivery.html">
-                <span class="menu-bullet">
-                  <span class="bullet bullet-dot"></span>
-                </span>
-                <span class="menu-title">Delivery</span>
-              </a>
-            </div>
-            <div class="menu-item">
-              <a class="menu-link" href="../../demo15/dist/dashboards/marketing.html">
-                <span class="menu-bullet">
-                  <span class="bullet bullet-dot"></span>
-                </span>
-                <span class="menu-title">Marketing</span>
-              </a>
-            </div>
-            <div class="menu-item">
-              <a class="menu-link" href="../../demo15/dist/dashboards/social.html">
-                <span class="menu-bullet">
-                  <span class="bullet bullet-dot"></span>
-                </span>
-                <span class="menu-title">Social</span>
-              </a>
-            </div>
-            <div class="menu-item">
-              <a class="menu-link" href="../../demo15/dist/landing.html">
-                <span class="menu-bullet">
-                  <span class="bullet bullet-dot"></span>
-                </span>
-                <span class="menu-title">Landing</span>
-              </a>
-            </div>
-          </div>
+            <span class="menu-title">Beranda</span>
+          </a>
         </div>
 
         <div class="menu-item">
@@ -161,62 +94,6 @@
                   <span class="bullet bullet-dot"></span>
                 </span>
                 <span class="menu-title">Course Category</span>
-              </a>
-            </div>
-            <div class="menu-item">
-              <a class="menu-link" href="../../demo15/dist/dashboards/ecommerce.html">
-                <span class="menu-bullet">
-                  <span class="bullet bullet-dot"></span>
-                </span>
-                <span class="menu-title">eCommerce</span>
-              </a>
-            </div>
-            <div class="menu-item">
-              <a class="menu-link" href="../../demo15/dist/dashboards/store-analytics.html">
-                <span class="menu-bullet">
-                  <span class="bullet bullet-dot"></span>
-                </span>
-                <span class="menu-title">Store Analytics</span>
-              </a>
-            </div>
-            <div class="menu-item">
-              <a class="menu-link" href="../../demo15/dist/dashboards/logistics.html">
-                <span class="menu-bullet">
-                  <span class="bullet bullet-dot"></span>
-                </span>
-                <span class="menu-title">Logistics</span>
-              </a>
-            </div>
-            <div class="menu-item">
-              <a class="menu-link" href="../../demo15/dist/dashboards/delivery.html">
-                <span class="menu-bullet">
-                  <span class="bullet bullet-dot"></span>
-                </span>
-                <span class="menu-title">Delivery</span>
-              </a>
-            </div>
-            <div class="menu-item">
-              <a class="menu-link" href="../../demo15/dist/dashboards/marketing.html">
-                <span class="menu-bullet">
-                  <span class="bullet bullet-dot"></span>
-                </span>
-                <span class="menu-title">Marketing</span>
-              </a>
-            </div>
-            <div class="menu-item">
-              <a class="menu-link" href="../../demo15/dist/dashboards/social.html">
-                <span class="menu-bullet">
-                  <span class="bullet bullet-dot"></span>
-                </span>
-                <span class="menu-title">Social</span>
-              </a>
-            </div>
-            <div class="menu-item">
-              <a class="menu-link" href="../../demo15/dist/landing.html">
-                <span class="menu-bullet">
-                  <span class="bullet bullet-dot"></span>
-                </span>
-                <span class="menu-title">Landing</span>
               </a>
             </div>
           </div>
