@@ -91,15 +91,15 @@ class CurriculumController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Course $course, Curriculum $curriculum)
     {
-        $curriculum = Curriculum::find($id);
-        foreach ($curriculum->subcurriculum as $subcurriculum) {
+        $kurikulum = Curriculum::find($curriculum->id);
+        foreach ($kurikulum->subcurriculum as $subcurriculum) {
             if (Str::contains($subcurriculum->content, ['.pdf', '.ppt', '.pptx'])) {
                 File::delete(public_path('doc/subcurriculum/'.$subcurriculum->content));
             }
         }
-        $curriculum->delete();
+        $kurikulum->delete();
 
         return redirect()->back()->with('success', 'Kurikulum berhasil dihapus');
     }

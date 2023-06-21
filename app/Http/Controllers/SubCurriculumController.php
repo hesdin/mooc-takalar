@@ -104,13 +104,13 @@ class SubCurriculumController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Course $course, Curriculum $curriculum, SubCurriculum $subcurriculum)
     {
-        $subcurriculum = SubCurriculum::find($id);
-        if (Str::contains($subcurriculum->content, ['.pdf', '.ppt', '.pptx'])) {
-            File::delete(public_path('doc/subcurriculum/'.$subcurriculum->content));
+        $sub = SubCurriculum::find($subcurriculum->id);
+        if (Str::contains($sub->content, ['.pdf', '.ppt', '.pptx'])) {
+            File::delete(public_path('doc/subcurriculum/'.$sub->content));
         }
-        $subcurriculum->save();
+        $sub->delete();
 
         return redirect()->back()->with('success', 'Sub kurikulum berhasil dihapus');
     }
