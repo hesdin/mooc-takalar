@@ -36,4 +36,12 @@ class QuestionController extends Controller
 
         return redirect()->back()->with('success', 'Pertanyaan berhasil disimpan');
     }
+
+    public function destroy(Request $request)
+    {
+        $pertanyaan = Question::find($request->id);
+        $pertanyaan->delete();
+
+        return redirect()->back()->with('success', 'Pertanyaan berhasil dihapus');
+    }
 }
