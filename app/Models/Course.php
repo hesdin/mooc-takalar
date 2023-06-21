@@ -33,6 +33,11 @@ class Course extends Model
         return $this->belongsTo(Instructor::class);
     }
 
+    public function enrollment()
+    {
+        return $this->hasMany(Enrollment::class);
+    }
+
     public function curriculum()
     {
         return $this->hasMany(Curriculum::class);

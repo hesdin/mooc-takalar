@@ -325,7 +325,7 @@
 
                 </div>
                 <h6 class="mb-0 ms-3 me-auto">Enrolled</h6>
-                <span>1982 students</span>
+                <span>{{ $course->enrollment->count() }} member</span>
               </li>
             </ul>
           </div>
