@@ -22,7 +22,7 @@ class PreTestController extends Controller
             'quizzes' => Quiz::where('test_type', 'pre')->get()
         ];
 
-        return view('pretest.index', $data);
+        return view('instruktur.pretest.index', $data);
     }
 
     /**
@@ -65,7 +65,7 @@ class PreTestController extends Controller
             'quiz' => Quiz::find($id)
         ];
 
-        return view('pretest.show', $data);
+        return view('instruktur.pretest.show', $data);
     }
 
     /**

@@ -21,7 +21,7 @@ class PostTestController extends Controller
             'quizzes' => Quiz::where('test_type', 'post')->get()
         ];
 
-        return view('posttest.index', $data);
+        return view('instruktur.posttest.index', $data);
     }
 
     /**
@@ -64,7 +64,7 @@ class PostTestController extends Controller
             'quiz' => Quiz::find($id)
         ];
 
-        return view('posttest.show', $data);
+        return view('instruktur.posttest.show', $data);
     }
 
     /**
