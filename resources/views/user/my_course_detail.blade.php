@@ -77,6 +77,11 @@
           aria-controls="pills-overview" aria-selected="true">Konten Kursus</a>
       </li>
 
+      <li class="nav-item">
+        <a class="nav-link" id="pills-reviews-tab" data-bs-toggle="pill" href="#pills-reviews" role="tab"
+          aria-controls="pills-reviews" aria-selected="true">Tanya Jawab</a>
+      </li>
+
     </ul>
 
     <div class="tab-content" id="pills-tabContent">
