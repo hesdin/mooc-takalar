@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Course;
 use App\Models\Gtk;
 use App\Models\Quiz;
-use App\Models\Course;
 use App\Models\QuizResult;
 use App\Models\UserAnswer;
 use Illuminate\Support\Str;
