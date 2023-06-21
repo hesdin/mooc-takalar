@@ -40,6 +40,7 @@ Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 Route::prefix('guru')->middleware(['auth:guru'])->name('guru.')->group(function () {
     Route::get('/enrollment/course/{uuid}', [EnrollController::class, 'enrollment'])->name('enrollment');
     Route::get('/my-course/', [MyCourseController::class, 'myCourse'])->name('mycourse');
+    Route::get('/my-course/{uuid}', [MyCourseController::class, 'myCourseDetail'])->name('mycourse.detail');
     Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('dashboard');
 });
 

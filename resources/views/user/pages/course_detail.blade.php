@@ -7,6 +7,8 @@
       margin-right: 150px !important;
     }
   </style>
+  {{-- toastr --}}
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/css/toastr.css" rel="stylesheet" />
 @endpush
 
 @section('content')
@@ -39,7 +41,7 @@
         <p class="me-xl-13 mb-5">{{ $course->sub_title }}</p>
 
         <!-- COURSE META
-                                                                                                                                                                                                                                ================================================== -->
+                                                                                                                                                                                                                                            ================================================== -->
         <div class="d-md-flex align-items-center mb-5">
           <div class="border rounded-circle d-inline-block mb-4 mb-md-0 me-md-6 me-lg-4 me-xl-6">
             <div class="p-2">
@@ -59,7 +61,7 @@
           </div>
         </div>
         <!-- COURSE INFO TAB
-                                                                                                                                                                                                                                ================================================== -->
+                                                                                                                                                                                                                                            ================================================== -->
         <div class="border rounded shadow p-3 mb-6">
           <ul id="pills-tab" class="nav nav-pills course-tab-v2 h5 mb-0 flex-nowrap overflow-auto" role="tablist">
             <li class="nav-item">
@@ -129,8 +131,9 @@
                     <h5 class="mb-0 w-100">
                       <button
                         class="d-flex align-items-center p-5 min-height-80 text-dark fw-medium collapse-accordion-toggle line-height-one"
-                        type="button" data-bs-toggle="collapse" data-bs-target="#Curriculumcollapse{{ $curriculum->id }}"
-                        aria-expanded="true" aria-controls="Curriculumcollapse{{ $curriculum->id }}">
+                        type="button" data-bs-toggle="collapse"
+                        data-bs-target="#Curriculumcollapse{{ $curriculum->id }}" aria-expanded="true"
+                        aria-controls="Curriculumcollapse{{ $curriculum->id }}">
                         <span class="me-4 text-dark d-flex">
                           <!-- Icon -->
                           <svg width="15" height="2" viewBox="0 0 15 2" fill="none"
@@ -241,7 +244,7 @@
 
       <div class="col-lg-4">
         <!-- SIDEBAR FILTER
-                                                                                                                                                                                                                                ================================================== -->
+                                                                                                                                                                                                                                            ================================================== -->
         <div class="d-block rounded border p-2 shadow mb-6">
           <a href="#" class="d-block sk-thumbnail rounded mb-1" data-fancybox="">
             <img class="rounded shadow-light-lg" src="{{ asset('storage/images/course/' . $course->image) }}"
@@ -828,3 +831,21 @@
     </div>
   </div>
 @endsection
+
+@push('js')
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+    integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+  {{-- toastr js --}}
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/js/toastr.js"></script>
+
+  <script>
+    $(document).ready(function() {
+      toastr.options.timeOut = 10000;
+      //   @if (Session::has('error'))
+      toastr.error('test');
+      //   @elseif (Session::has('success'))
+      // toastr.success('{{ Session::get('success') }}');
+      //   @endif
+    });
+  </script>
+@endpush
