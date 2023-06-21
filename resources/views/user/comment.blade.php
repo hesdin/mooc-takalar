@@ -47,7 +47,7 @@
                 </div>
 
                 <!-- Back to Course -->
-                <a href="{{ route('guru.mycourse') }}"
+                <a href="{{ route('guru.mycourse.detail', $course->uuid) }}"
                     class="btn btn-sm btn-primary ms-md-6 px-6 mb-3 mb-md-0 flex-shrink-0">Kembali ke Kursus</a>
             </div>
         </div>
