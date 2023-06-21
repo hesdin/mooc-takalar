@@ -100,8 +100,13 @@
                                             <!--end::Menu item-->
                                             <!--begin::Menu item-->
                                             <div class="menu-item px-3">
-                                                <a href="#" class="menu-link px-3"
+                                                <form id="delete-form-{{ $question->id }}" action="{{ route('instruktur.question.destroy') }}" method="POST" class="d-inline">
+                                                  @csrf
+                                                  @method('DELETE')
+                                                  <input type="hidden" name="id" value="{{ $question->id }}">
+                                                <a href="#" class="menu-link px-3 showConfirm"
                                                     data-kt-ecommerce-product-filter="delete_row">Delete</a>
+                                                </form>
                                             </div>
                                             <!--end::Menu item-->
                                         </div>

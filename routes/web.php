@@ -54,4 +54,5 @@ Route::prefix('instruktur')->middleware(['auth:instruktur'])->name('instruktur.'
     ]);
 
     Route::post('question', [QuestionController::class, 'store'])->name('question.store');
+    Route::delete('question', [QuestionController::class, 'destroy'])->name('question.destroy');
 });
