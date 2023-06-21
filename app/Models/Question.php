@@ -13,4 +13,9 @@ class Question extends Model
     {
         return $this->hasOne(AnswerChoice::class)->where('is_correct', '1');
     }
+
+    public function choices()
+    {
+        return $this->hasMany(AnswerChoice::class);
+    }
 }
