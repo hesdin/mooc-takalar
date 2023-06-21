@@ -19,9 +19,9 @@ class PagesController extends Controller
 
         $categoryIdsWithMostCourses = $categories->pluck('id');
 
-        $all_courses = Course::whereIn('category_id', $categoryIdsWithMostCourses)->get();
+        $all_courses = Course::has('preTest')->whereIn('category_id', $categoryIdsWithMostCourses)->get();
 
-        $latest_courses = Course::orderBy('created_at', 'desc')->take(12)->get();
+        $latest_courses = Course::has('preTest')->orderBy('created_at', 'desc')->take(12)->get();
 
         $instructors = Instructor::with('courses')
             ->has('courses')
