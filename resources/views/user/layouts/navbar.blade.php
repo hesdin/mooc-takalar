@@ -27,7 +27,7 @@
           </div>
         </a>
 
-        <ul class="dropdown-menu dropdown-menu-md bg-dark rounded py-4 mt-4" aria-labelledby="navbarVerticalMenu">
+        {{-- <ul class="dropdown-menu dropdown-menu-md bg-dark rounded py-4 mt-4" aria-labelledby="navbarVerticalMenu">
           <li class="dropdown-item dropright">
             <a class="dropdown-link dropdown-toggle" data-bs-toggle="dropdown" href="#">
               <div class="me-4 d-flex text-white icon-xs">
@@ -413,7 +413,7 @@
               </div>
             </div>
           </li>
-        </ul>
+        </ul> --}}
       </li>
     </ul>
 
@@ -449,8 +449,7 @@
                 @foreach (auth()->guard('guru')->user()->enrollments as $enrollment)
                   <div class="col mb-5 col-wd-auto">
                     <!-- List -->
-                    <a class="dropdown-item"
-                      href="{{ route('course.detail', ['uuid' => $enrollment->course->uuid]) }}">
+                    <a class="dropdown-item" href="{{ route('course.detail', ['uuid' => $enrollment->course->uuid]) }}">
                       <img src="{{ asset('storage/images/course/' . $enrollment->course->image) }}"
                         class="img-fluid shadow rounded border d-flex mx-auto mb-5" alt="..."
                         style="width: 100%; height: auto;">
@@ -490,8 +489,8 @@
 
         </li>
         <li class="nav-item">
-          <a class="nav-link text-dark px-xl-4" id="navbarCourses" href="{{ route('course.all') }}"
-            aria-haspopup="true" aria-expanded="false">
+          <a class="nav-link text-dark px-xl-4" id="navbarCourses" href="{{ route('course.all') }}" aria-haspopup="true"
+            aria-expanded="false">
             Semua Kursus
           </a>
 
@@ -508,9 +507,11 @@
                 <div class="row gx-0">
                   <div class="col-12 col-lg-6">
                     <!-- List -->
+                    {{-- @foreach ($categories as $category) --}}
                     <a class="dropdown-item" href="#">
-                      Event List
+                      Kategori
                     </a>
+                    {{-- @endforeach --}}
 
                   </div>
                 </div>

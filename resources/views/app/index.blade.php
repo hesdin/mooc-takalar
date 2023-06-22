@@ -37,6 +37,8 @@
         @include('app.admin_sidebar')
       @elseif (Auth::guard('instruktur')->check())
         @include('app.instruktur_sidebar')
+      @elseif (Auth::guard('guru')->check())
+        @include('app.guru_sidebar')
       @endif
 
       <!--end::Aside-->

@@ -9,6 +9,7 @@
 <link rel="stylesheet" href="{{ asset('frontend/assets/libs/jarallax/dist/jarallax.css') }}">
 <link rel="stylesheet" href="{{ asset('frontend/assets/libs/quill/dist/quill.core.css') }}">
 
+
 @stack('css')
 
 <!-- Map -->

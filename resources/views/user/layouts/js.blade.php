@@ -18,6 +18,7 @@
 <script src="{{ asset('frontend/assets/libs/smooth-scroll/dist/smooth-scroll.min.js') }}"></script>
 <script src="{{ asset('frontend/assets/libs/typed.js/lib/typed.min.js') }}"></script>
 
+
 @stack('js')
 
 <!-- Map -->

@@ -57,16 +57,17 @@
             </div>
             <div class="none dropdown-menu" aria-expanded="false">
               <div class="none" role="listbox">
-                <div id="choices--fvsx-item-choice-1"
+                <div id="choices--mm83-item-choice-1"
                   class="choices__item dropdown-item active choices__item--selectable is-highlighted" role="option"
                   data-choice="" data-id="1" data-value="All Categories" data-select-text="Press to select"
                   data-choice-selectable="" aria-selected="true">All Categories</div>
-                <div id="choices--fvsx-item-choice-2" class="choices__item dropdown-item choices__item--selectable"
+                <div id="choices--mm83-item-choice-2" class="choices__item dropdown-item choices__item--selectable"
                   role="option" data-choice="" data-id="2" data-value="Another option"
-                  data-select-text="Press to select" data-choice-selectable="">Another option</div>
-                <div id="choices--fvsx-item-choice-3" class="choices__item dropdown-item choices__item--selectable"
+                  data-select-text="Press to select" data-choice-selectable="" aria-selected="false">Another option</div>
+                <div id="choices--mm83-item-choice-3" class="choices__item dropdown-item choices__item--selectable"
                   role="option" data-choice="" data-id="3" data-value="Something else here"
-                  data-select-text="Press to select" data-choice-selectable="">Something else here</div>
+                  data-select-text="Press to select" data-choice-selectable="" aria-selected="false">Something else here
+                </div>
               </div>
             </div>
           </div>
@@ -91,19 +92,22 @@
               </div>
               <div class="none dropdown-menu" aria-expanded="false">
                 <div class="none" role="listbox">
-                  <div id="choices--wbee-item-choice-1"
+                  <div id="choices--bntd-item-choice-1"
                     class="choices__item dropdown-item active choices__item--selectable is-highlighted" role="option"
                     data-choice="" data-id="1" data-value="Default" data-select-text="Press to select"
                     data-choice-selectable="" aria-selected="true">Default</div>
-                  <div id="choices--wbee-item-choice-2" class="choices__item dropdown-item choices__item--selectable"
+                  <div id="choices--bntd-item-choice-2" class="choices__item dropdown-item choices__item--selectable"
                     role="option" data-choice="" data-id="2" data-value="New Courses"
-                    data-select-text="Press to select" data-choice-selectable="">New Courses</div>
-                  <div id="choices--wbee-item-choice-3" class="choices__item dropdown-item choices__item--selectable"
+                    data-select-text="Press to select" data-choice-selectable="" aria-selected="false">New Courses
+                  </div>
+                  <div id="choices--bntd-item-choice-3" class="choices__item dropdown-item choices__item--selectable"
                     role="option" data-choice="" data-id="3" data-value="Price High to low"
-                    data-select-text="Press to select" data-choice-selectable="">Price High to low</div>
-                  <div id="choices--wbee-item-choice-4" class="choices__item dropdown-item choices__item--selectable"
+                    data-select-text="Press to select" data-choice-selectable="" aria-selected="false">Price High to
+                    low</div>
+                  <div id="choices--bntd-item-choice-4" class="choices__item dropdown-item choices__item--selectable"
                     role="option" data-choice="" data-id="4" data-value="Price Low to High"
-                    data-select-text="Press to select" data-choice-selectable="">Price Low to High</div>
+                    data-select-text="Press to select" data-choice-selectable="" aria-selected="false">Price Low to
+                    High</div>
                 </div>
               </div>
             </div>
@@ -122,8 +126,9 @@
           <div class="card card-border-hover border shadow-dark-hover p-2 lift sk-fade">
             <!-- Image -->
             <div class="card-zoom position-relative">
-              <a href="course-single-v5.html" class="card-img sk-thumbnail d-block">
-                <img class="rounded shadow-light-lg" src="assets/img/products/product-3.jpg" alt="...">
+              <a href="{{ route('course.detail', ['uuid' => $course->uuid]) }}" class="card-img sk-thumbnail d-block">
+                <img class="rounded shadow-light-lg" src="{{ asset('storage/images/course/' . $course->image) }}"
+                  alt="...">
               </a>
 
               <span class="badge sk-fade-bottom badge-lg badge-purple badge-pill badge-float bottom-0 left-0 mb-4 ms-4">
@@ -136,7 +141,8 @@
               <a href="instructors-single.html" class="">
                 <div
                   class="avatar avatar-xl sk-fade-right badge-float position-absolute top-0 right-0 mt-n6 me-5 rounded-circle shadow border border-white border-w-lg">
-                  <img src="assets/img/avatars/avatar-3.jpg" alt="..." class="avatar-img rounded-circle">
+                  <img src="{{ asset('storage/images/' . $course->instructor->image) }}" alt="..."
+                    class="avatar-img rounded-circle">
                 </div>
               </a>
 
@@ -166,7 +172,7 @@
                             </svg>
 
                           </div>
-                          <div class="font-size-sm">5 lessons</div>
+                          <div class="font-size-sm">{{ $course->enrollment->count() }} lessons</div>
                         </div>
                       </li>
                       <li class="nav-item px-3">
