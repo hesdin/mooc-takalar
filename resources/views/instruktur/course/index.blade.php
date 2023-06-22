@@ -65,9 +65,9 @@
           <table id="kt_datatable_example_1" class="table table-row-bordered gy-5">
             <thead>
               <tr class="fw-bold fs-6 text-muted">
-                <th>ID</th>
+                <th>#</th>
                 <th>Kursus</th>
-                <th>kategori</th>
+                <th>Kategori</th>
                 <th>Created At</th>
                 <th class="text-end">Actions</th>
               </tr>
@@ -121,7 +121,9 @@
                       <!--end::Menu item-->
                       <!--begin::Menu item-->
                       <div class="menu-item px-3">
-                        <form id="delete-form-{{ $course->id }}" action="{{ route('instruktur.courses.destroy', $course->id) }}" method="POST" class="d-inline">
+                        <form id="delete-form-{{ $course->id }}"
+                          action="{{ route('instruktur.courses.destroy', $course->id) }}" method="POST"
+                          class="d-inline">
                           @csrf
                           @method('DELETE')
                           <a href="#" class="menu-link px-3 showConfirm" data-name="{{ $course->name }}">Delete</a>

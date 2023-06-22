@@ -446,16 +446,28 @@
             <div class="dropdown-menu border-xl shadow-none dropdown-full pt-xl-7 px-xl-8"
               aria-labelledby="navbarLandings">
               <div class="row row-cols-2 row-cols-md-4 row-cols-lg-5 row-cols-xl-6">
-                <div class="col mb-5 col-wd-auto">
+                @foreach (auth()->guard('guru')->user()->enrollments as $enrollment)
+                  <div class="col mb-5 col-wd-auto">
+                    <!-- List -->
+                    <a class="dropdown-item"
+                      href="{{ route('course.detail', ['uuid' => $enrollment->course->uuid]) }}">
+                      <img src="{{ asset('storage/images/course/' . $enrollment->course->image) }}"
+                        class="img-fluid shadow rounded border d-flex mx-auto mb-5" alt="..."
+                        style="width: 100%; height: auto;">
+                      <!-- Heading -->
+                      <h6 class="text-center mb-0">{{ $enrollment->course->title }}</h6>
+                    </a>
+                  </div>
+                @endforeach
+              </div>
+              <div class="row row-cols-2 row-cols-md-4 row-cols-lg-5 row-cols-xl-6">
+                <div class="col mb-3 col-wd-auto">
                   <!-- List -->
-                  <a class="dropdown-item" href="index.html" target="_blank">
-                    <img src="{{ asset('frontend/assets/img/menu/home-v1.jpg') }}"
-                      class="img-fluid shadow rounded border d-flex mx-auto mb-5 h-md-152" alt="...">
+                  <a class="dropdown-item" href="{{ route('guru.mycourse') }}">
                     <!-- Heading -->
-                    <h6 class="text-center mb-0">Belajar Laravel Dasar</h6>
+                    <h6 class="text-center mb-0">Semua Kursus Pembelajaran</h6>
                   </a>
                 </div>
-
               </div>
             </div>
           @else
@@ -464,15 +476,15 @@
               <div class="row row-cols-2 row-cols-md-4 row-cols-lg-5 row-cols-xl-6">
                 <div class="col mb-3 col-wd-auto">
                   <!-- List -->
-                  <a class="dropdown-item" href="#" target="_blank">
+                  <a class="dropdown-item" href="{{ route('login') }}">
                     <!-- Heading -->
                     <h6 class="text-center mb-0">Login untuk menampilkan Pembelajaran</h6>
                   </a>
                 </div>
-
               </div>
             </div>
           @endif
+
 
 
 

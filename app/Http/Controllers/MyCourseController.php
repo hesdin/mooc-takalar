@@ -25,7 +25,6 @@ class MyCourseController extends Controller
     }
 
 
-
     public function myCourseDetail($uuid)
     {
         $course = Course::where('uuid', $uuid)->first();
