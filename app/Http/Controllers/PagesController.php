@@ -47,4 +47,11 @@ class PagesController extends Controller
 
         return view('user.pages.course_detail');
     }
+
+    public function courseAll()
+    {
+        $courses = Course::all();
+
+        return view('user.pages.all_course', compact('courses'));
+    }
 }

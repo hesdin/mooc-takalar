@@ -36,7 +36,11 @@ class AuthController extends Controller
             if (strpos($intendedUrl, 'enrollment') !== false) {
                 return redirect()->intended($intendedUrl);
             } else {
-                return redirect()->intended("$guard/dashboard");
+                if ($guard == 'guru') {
+                    return redirect()->intended("/");
+                } else {
+                    return redirect()->intended("$guard/dashboard");
+                }
             }
         }
 

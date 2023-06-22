@@ -2,7 +2,7 @@
   <div class="container container-wd">
 
     <!-- Brand -->
-    <a class="navbar-brand ms-0" href="index.html">
+    <a class="navbar-brand ms-0" href="{{ route('home') }}">
       <img
         src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/MOOC_-_Massive_Open_Online_Course_logo.svg/1200px-MOOC_-_Massive_Open_Online_Course_logo.svg.png"
         class="navbar-brand-img" alt="..." style="width: 50%">
@@ -441,24 +441,44 @@
             href="#" aria-haspopup="true" aria-expanded="false">
             Pembelajaran Saya
           </a>
-          <div class="dropdown-menu border-xl shadow-none dropdown-full pt-xl-7 px-xl-8"
-            aria-labelledby="navbarLandings">
-            <div class="row row-cols-2 row-cols-md-4 row-cols-lg-5 row-cols-xl-6">
-              <div class="col mb-5 col-wd-auto">
-                <!-- List -->
-                <a class="dropdown-item" href="index.html" target="_blank">
-                  <img src="{{ asset('frontend/assets/img/menu/home-v1.jpg') }}"
-                    class="img-fluid shadow rounded border d-flex mx-auto mb-5 h-md-152" alt="...">
-                  <!-- Heading -->
-                  <h6 class="text-center mb-0">Belajar Laravel Dasar</h6>
-                </a>
-              </div>
 
+          @if (Auth::guard('guru')->check())
+            <div class="dropdown-menu border-xl shadow-none dropdown-full pt-xl-7 px-xl-8"
+              aria-labelledby="navbarLandings">
+              <div class="row row-cols-2 row-cols-md-4 row-cols-lg-5 row-cols-xl-6">
+                <div class="col mb-5 col-wd-auto">
+                  <!-- List -->
+                  <a class="dropdown-item" href="index.html" target="_blank">
+                    <img src="{{ asset('frontend/assets/img/menu/home-v1.jpg') }}"
+                      class="img-fluid shadow rounded border d-flex mx-auto mb-5 h-md-152" alt="...">
+                    <!-- Heading -->
+                    <h6 class="text-center mb-0">Belajar Laravel Dasar</h6>
+                  </a>
+                </div>
+
+              </div>
             </div>
-          </div>
+          @else
+            <div class="dropdown-menu border-xl shadow-none dropdown-full pt-xl-7 px-xl-8"
+              aria-labelledby="navbarLandings">
+              <div class="row row-cols-2 row-cols-md-4 row-cols-lg-5 row-cols-xl-6">
+                <div class="col mb-3 col-wd-auto">
+                  <!-- List -->
+                  <a class="dropdown-item" href="#" target="_blank">
+                    <!-- Heading -->
+                    <h6 class="text-center mb-0">Login untuk menampilkan Pembelajaran</h6>
+                  </a>
+                </div>
+
+              </div>
+            </div>
+          @endif
+
+
+
         </li>
         <li class="nav-item">
-          <a class="nav-link text-dark px-xl-4" id="navbarCourses" data-bs-toggle="dropdown" href="#"
+          <a class="nav-link text-dark px-xl-4" id="navbarCourses" href="{{ route('course.all') }}"
             aria-haspopup="true" aria-expanded="false">
             Semua Kursus
           </a>
@@ -476,65 +496,14 @@
                 <div class="row gx-0">
                   <div class="col-12 col-lg-6">
                     <!-- List -->
-                    <a class="dropdown-item" href="event-list.html">
+                    <a class="dropdown-item" href="#">
                       Event List
                     </a>
-                    <a class="dropdown-item" href="event-single.html">
-                      Event Single
-                    </a>
-                    <a class="dropdown-item" href="gallery.html">
-                      Gallery
-                    </a>
-                    <a class="dropdown-item mb-5 mb-lg-0" href="pricing.html">
-                      Pricing
-                    </a>
-                  </div>
-                  <div class="col-12 col-lg-6">
-                    <!-- List -->
-                    <a class="dropdown-item" href="about-v1.html">
-                      About v1
-                    </a>
-                    <a class="dropdown-item" href="about-v2.html">
-                      About v2
-                    </a>
-                    <a class="dropdown-item" href="contact-us.html">
-                      Contact us
-                    </a>
-                    <a class="dropdown-item mb-5 mb-lg-0" href="terms-of-service.html">
-                      Terms of Service
-                    </a>
-                  </div>
-                </div>
-              </div>
-              <div class="col-6">
-                <div class="row gx-0">
-                  <div class="col-12 col-lg-6">
-                    <!-- List -->
-                    <a class="dropdown-item" href="faq.html">
-                      FAQ
-                    </a>
-                    <a class="dropdown-item" href="login.html">
-                      Login
-                    </a>
-                    <a class="dropdown-item" href="register.html">
-                      Register
-                    </a>
-                    <a class="dropdown-item mb-5 mb-lg-0" href="become-instructor.html">
-                      Become an Instructor
-                    </a>
-                  </div>
 
-                  <div class="col-12 col-lg-6">
-                    <!-- List -->
-                    <a class="dropdown-item" href="coming-soon.html">
-                      Coming Soon
-                    </a>
-                    <a class="dropdown-item mb-5 mb-lg-0" href="404.html">
-                      404
-                    </a>
                   </div>
                 </div>
               </div>
+
             </div>
           </div> <!-- / .row -->
         </li>
@@ -644,9 +613,6 @@
             </svg>
           </a>
         @endif
-
-
-
 
       </li>
 
