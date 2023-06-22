@@ -262,10 +262,10 @@
                     <div class="col mb-5 mb-md-0">
                         <div class="border rounded shadow d-flex align-items-center justify-content-center px-9 py-8">
                             <div class="m-2 text-center">
-                                <h1 class="display-2 mb-0 fw-medium mb-n1">{{ $postTest->result->where('user_id', auth()->user()->id)->first() ? $postTest->result->where('user_id', auth()->user()->id)->first()->score : 'N/A' }}</h1>
+                                <h1 class="display-2 mb-0 fw-medium mb-n1">{{ $postTest && $postTest->result->where('user_id', auth()->user()->id)->first() ? $postTest->result->where('user_id', auth()->user()->id)->first()->score : '?' }}</h1>
                                 <h5 class="mb-0">Post Test</h5>
                                 <div class="star-rating">
-                                    <div class="rating" style="width:{{ $postTest->result->where('user_id', auth()->user()->id)->first() ? $postTest->result->where('user_id', auth()->user()->id)->first()->score : 0 }}%;"></div>
+                                    <div class="rating" style="width:{{ $postTest && $postTest->result->where('user_id', auth()->user()->id)->first() ? $postTest->result->where('user_id', auth()->user()->id)->first()->score : 0 }}%;"></div>
                                 </div>
                             </div>
                         </div>
