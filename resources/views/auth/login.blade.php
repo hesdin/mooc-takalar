@@ -36,7 +36,7 @@
       <!--begin::Content-->
       <div class="d-flex flex-center flex-column flex-column-fluid p-10 pb-lg-20">
         <!--begin::Logo-->
-        <a href="../../demo15/dist/index.html" class="mb-12">
+        <a href="{{ route('home') }}" class="mb-12">
           <img alt="Logo"
             src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/MOOC_-_Massive_Open_Online_Course_logo.svg/1598px-MOOC_-_Massive_Open_Online_Course_logo.svg.png?20130311214424"
             class="h-40px" />
@@ -73,8 +73,7 @@
                 <label class="form-label fw-bolder text-dark fs-6 mb-0">Password</label>
                 <!--end::Label-->
                 <!--begin::Link-->
-                <a href="../../demo15/dist/authentication/layouts/basic/password-reset.html"
-                  class="link-primary fs-6 fw-bolder">Forgot Password ?</a>
+                <a href="#" class="link-primary fs-6 fw-bolder">Forgot Password ?</a>
                 <!--end::Link-->
               </div>
               <!--end::Wrapper-->
@@ -105,9 +104,9 @@
       <div class="d-flex flex-center flex-column-auto p-10">
         <!--begin::Links-->
         <div class="d-flex align-items-center fw-bold fs-6">
-          <a href="https://keenthemes.com" class="text-muted text-hover-primary px-2">About</a>
-          <a href="mailto:support@keenthemes.com" class="text-muted text-hover-primary px-2">Contact</a>
-          <a href="https://1.envato.market/EA4JP" class="text-muted text-hover-primary px-2">Contact Us</a>
+          <a href="#" class="text-active text-hover-primary px-2">Copyright @ 2023</a>
+          <a href="#" class="text-dark text-hover-primary">MOOC - Kabupaten
+            Takalar</a>
         </div>
         <!--end::Links-->
       </div>

@@ -11,7 +11,7 @@
         <!--begin::Aside column-->
         <div class="d-flex flex-column gap-7 gap-lg-10 w-100 w-lg-300px mb-7 me-lg-10">
           <!--begin::Thumbnail settings-->
-          <div class="card card-flush border border-dark rounded-0">
+          <div class="card card-flush">
             <!--begin::Card header-->
             <div class="card-header">
               <!--begin::Card title-->
@@ -24,8 +24,7 @@
             <!--begin::Card body-->
             <div class="card-body text-center pt-0">
               <!--begin::Image input-->
-              <div class="image-input image-input-empty image-input-outline border border-dark rounded-0 mb-3"
-                data-kt-image-input="true"
+              <div class="image-input image-input-empty image-input-outline mb-3" data-kt-image-input="true"
                 style="background-image: url(https://s.udemycdn.com/course/200_H/placeholder.jpg)">
                 <!--begin::Preview existing avatar-->
                 <div class="image-input-wrapper" style="width: 220px;"></div>
@@ -58,7 +57,7 @@
               </div>
               <!--end::Image input-->
               <!--begin::Description-->
-              <div class="text-dark fs-7 required">Unggah gambar kursus Anda di sini. Hanya file gambar *.png, *.jpg dan
+              <div class="text-dark fs-7 required">Unggah gambar kursus. Hanya file gambar *.png, *.jpg dan
                 *.jpeg
               </div>
               <!--end::Description-->
@@ -68,7 +67,7 @@
           <!--end::Thumbnail settings-->
 
           <!--begin::Category & tags-->
-          <div class="card card-flush rounded rounded-0 border border-dark">
+          <div class="card card-flush">
             <!--begin::Card header-->
             <div class="card-header">
               <!--begin::Card title-->
@@ -110,7 +109,7 @@
             <div class="tab-pane fade show active" id="kt_ecommerce_add_product_general" role="tab-panel">
               <div class="d-flex flex-column gap-7 gap-lg-10">
                 <!--begin::General options-->
-                <div class="card rounded-0 border border-dark card-flush py-0">
+                <div class="card card-flush py-0">
                   <!--begin::Card header-->
                   <div class="card-header">
                     <div class="card-title">

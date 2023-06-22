@@ -11,7 +11,7 @@
     <!--begin::Container-->
     <div class="container-fluid" id="kt_content_container">
       <!--begin::Card-->
-      <div class="card border border-dark rounded rounded-0">
+      <div class="card">
         <!--begin::Card header-->
         <div class="card-header border-0 pt-6">
           <!--begin::Card title-->
@@ -39,7 +39,7 @@
             <!--begin::Toolbar-->
             <div class="d-flex justify-content-end" data-kt-user-table-toolbar="base">
               <!--begin::Add user-->
-              <a href="{{ route('instruktur.courses.create') }}" class="btn btn-dark rounded rounded-0">
+              <a href="{{ route('instruktur.courses.create') }}" class="btn btn-primary">
                 <!--begin::Svg Icon | path: icons/duotune/arrows/arr075.svg-->
                 <span class="svg-icon svg-icon-2">
                   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
