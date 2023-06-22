@@ -25,10 +25,10 @@
             <div class="card-body text-center pt-0">
               <!--begin::Image input-->
               <div class="image-input image-input-empty image-input-outline mb-3" data-kt-image-input="true"
-                style="background-image: url(https://s.udemycdn.com/course/200_H/placeholder.jpg)">
+                style="background-image: url(https://kluban.net/wp-content/uploads/2015/05/blank-thumbnail.jpg)">
                 <!--begin::Preview existing avatar-->
                 <div class="image-input-wrapper" style="width: 220px;"></div>
-                <!--end::Preview existing avatar-->
+                <!--end::Preview existing avatar-->gi
                 <!--begin::Label-->
                 <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow"
                   data-kt-image-input-action="change" data-bs-toggle="tooltip" title=""
