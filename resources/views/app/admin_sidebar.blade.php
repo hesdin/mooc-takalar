@@ -5,7 +5,7 @@
   <!--begin::Brand-->
   <div class="aside-logo flex-column-auto px-9 mb-9 mb-lg-17 mx-auto" id="kt_aside_logo">
     <!--begin::Logo-->
-    <a href="../../demo15/dist/index.html">
+    <a href="#">
       <img alt="Logo"
         src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/MOOC_-_Massive_Open_Online_Course_logo.svg/1598px-MOOC_-_Massive_Open_Online_Course_logo.svg.png?20130311214424"
         class="h-30px logo" />
@@ -43,7 +43,7 @@
               </span>
               <!--end::Svg Icon-->
             </span>
-            <span class="menu-title">Beranda</span>
+            <span class="menu-title">Dashboard</span>
           </a>
         </div>
 

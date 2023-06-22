@@ -78,11 +78,12 @@
                   <td>{{ $course->id }}</td>
                   <td class="d-flex align-items-center">
                     <!--begin:: Thumbnail -->
-                    <div class="symbol symbol-65px me-5 symbol-square">
-                      <img src="{{ asset('storage/images/course/' . $course->image) }}" alt="{{ $course->name }}"
-                        class="w-100">
-                      {{-- <img src="assets/media/stock/600x400/img-26.jpg" class="" alt=""> --}}
-                    </div>
+                    <a href="{{ route('instruktur.courses.curriculum.index', ['course' => $course->id]) }}">
+                      <div class="symbol symbol-65px me-5 symbol-square">
+                        <img src="{{ asset('storage/images/course/' . $course->image) }}" alt="{{ $course->name }}"
+                          class="w-100">
+                      </div>
+                    </a>
                     <!--end::Thumbnail-->
                     <!--begin::User details-->
                     <div class="d-flex flex-column">
@@ -115,7 +116,7 @@
                       data-kt-menu="true">
                       <!--begin::Menu item-->
                       <div class="menu-item px-3">
-                        <a data-bs-toggle="modal" data-bs-target="#editModal{{ $course->id }}"
+                        <a href="{{ route('instruktur.courses.edit', ['course' => $course->uuid]) }}"
                           class="menu-link px-3">Edit</a>
                       </div>
                       <!--end::Menu item-->

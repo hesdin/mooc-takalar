@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use App\Models\CourseCategory;
 use PhpParser\Node\Stmt\Return_;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
 
 class CourseController extends Controller
 {
@@ -65,7 +66,6 @@ class CourseController extends Controller
         if ($save) {
             // Redirect atau response JSON dengan pesan sukses
             return redirect()->route('instruktur.courses.index')->with('success', 'Course created successfully');
-
         }
 
         // Redirect atau response JSON dengan pesan gagal
@@ -89,9 +89,13 @@ class CourseController extends Controller
      * @param  \App\Models\Course  $course
      * @return \Illuminate\Http\Response
      */
-    public function edit(Course $course)
+    public function edit($uuid)
     {
-        //
+
+        $course = Course::where('uuid', $uuid)->first();
+        $categories = CourseCategory::all();
+
+        return view('instruktur.course.edit', compact('course', 'categories'));
     }
 
     /**
@@ -101,9 +105,43 @@ class CourseController extends Controller
      * @param  \App\Models\Course  $course
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Course $course)
+    public function update(Request $request, $uuid)
     {
-        //
+        $course = Course::where('uuid', $uuid)->first();
+
+        // Periksa apakah kursus ditemukan
+        if (!$course) {
+            return redirect()->route('instruktur.courses.index')->with('failed', 'Course not found');
+        }
+
+        // Update data kursus
+        $course->title = $request->title;
+        $course->sub_title = $request->sub_title;
+        $course->description = $request->description;
+        $course->category_id = $request->category_id;
+
+        // Upload dan simpan gambar jika ada
+        if ($request->hasFile('image')) {
+            // Hapus gambar lama jika ada
+            if ($course->image) {
+                Storage::delete('public/images/course/' . $course->image);
+            }
+
+            $image = $request->file('image');
+            $imageName = Str::uuid() . '_' . time() . '.' . $image->extension();
+            $imagePath = $image->storeAs('public/images/course', $imageName);
+            $course->image = $imageName;
+        }
+
+        $save = $course->update();
+
+        if ($save) {
+            // Redirect atau response JSON dengan pesan sukses
+            return redirect()->route('instruktur.courses.index')->with('success', 'Course updated successfully');
+        }
+
+        // Redirect atau response JSON dengan pesan gagal
+        return redirect()->route('instruktur.courses.index')->with('failed', 'Update course failed');
     }
 
     /**
@@ -117,7 +155,7 @@ class CourseController extends Controller
         $course = Course::find($course->id);
         foreach ($course->subcurriculum as $subcurriculum) {
             if (Str::contains($subcurriculum->content, ['.pdf', '.ppt', '.pptx'])) {
-                File::delete(public_path('doc/subcurriculum/'.$subcurriculum->content));
+                File::delete(public_path('doc/subcurriculum/' . $subcurriculum->content));
             }
         }
         $course->delete();

@@ -11,11 +11,15 @@ class PagesController extends Controller
 {
     public function home()
     {
-        $categories = CourseCategory::with('courses')
-            ->has('courses')
-            // ->orderByDesc('courses_count')
+        $categories = CourseCategory::with(['courses' => function ($query) {
+            $query->whereHas('preTest');
+        }])
+            ->whereHas('courses', function ($query) {
+                $query->whereHas('preTest');
+            })
             ->take(4)
             ->get();
+
 
         $categoryIdsWithMostCourses = $categories->pluck('id');
 
@@ -50,7 +54,7 @@ class PagesController extends Controller
 
     public function courseAll()
     {
-        $courses = Course::all();
+        $courses = Course::has('preTest')->get();
 
         return view('user.pages.all_course', compact('courses'));
     }

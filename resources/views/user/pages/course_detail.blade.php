@@ -28,7 +28,7 @@
         <p class="me-xl-13 mb-5">{{ Str::ucfirst($course->sub_title) }}</p>
 
         <!-- COURSE META
-                                                                                                                                                                                                                                                                                                                                    ================================================== -->
+                                                                                                                                                                                                                                                                                                                                      ================================================== -->
         <div class="d-md-flex align-items-center mb-5">
           <div class="border rounded-circle d-inline-block mb-4 mb-md-0 me-md-6 me-lg-4 me-xl-6">
             <div class="p-2">
@@ -48,7 +48,7 @@
           </div>
         </div>
         <!-- COURSE INFO TAB
-                                                                                                                                                                                                                                                                                                                                    ================================================== -->
+                                                                                                                                                                                                                                                                                                                                      ================================================== -->
         <div class="border rounded shadow p-3 mb-6">
           <ul id="pills-tab" class="nav nav-pills course-tab-v2 h5 mb-0 flex-nowrap overflow-auto" role="tablist">
             <li class="nav-item">
@@ -75,11 +75,6 @@
               {!! $course->description !!}
             </div>
 
-            {{-- <p class="collapse mb-6 line-height-md" id="readcollapseExample">Anim pariatur cliche reprehenderit, enim
-              eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes
-              anderson cred nesciunt sapiente I will help you learn and master Figma app comprehensively from scratch.
-              Figma is an innovative and brilliant tool for User Interface design. It's used by everyone from
-              entrepreneurs ea proident.</p> --}}
             <a class="text-teal read-more h6 d-inline-block mb-8" data-bs-toggle="collapse" href="#readcollapseExample"
               role="button" aria-expanded="false" aria-controls="readcollapseExample">
               <span class="d-inline-flex align-items-center more">
@@ -226,7 +221,7 @@
 
       <div class="col-lg-4">
         <!-- SIDEBAR FILTER
-                                                                                                                                                                                                                                                                                                                                    ================================================== -->
+                                                                                                                                                                                                                                                                                                                                      ================================================== -->
         <div class="d-block rounded border p-2 shadow mb-6">
           <a href="#" class="d-block sk-thumbnail rounded mb-1" data-fancybox="">
             <img class="rounded shadow-light-lg" src="{{ asset('storage/images/course/' . $course->image) }}"

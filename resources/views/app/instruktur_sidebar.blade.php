@@ -15,9 +15,9 @@
   <!--begin::Aside user-->
   <div class="aside-user mb-5 mb-lg-10" id="kt_aside_user">
     <!--begin::User-->
-    <div class="d-flex align-items-center flex-column">
+    {{-- <div class="d-flex align-items-center flex-column">
       <!--begin::Symbol-->
-      <div class="symbol symbol-75px mb-4">
+      <div class="symbol symbol-55px mb-2">
         <img src="{{ asset('storage/images/' . Auth::guard('instruktur')->user()->image) }}" alt="">
       </div>
       <!--end::Symbol-->
@@ -25,14 +25,14 @@
       <div class="text-center">
         <!--begin::Username-->
         <a href="#"
-          class="text-gray-900 text-hover-primary fs-4 fw-boldest">{{ Auth::guard('instruktur')->user()->name }}</a>
+          class="text-gray-900 text-hover-primary fs-6">{{ Auth::guard('instruktur')->user()->name }}</a>
         <!--end::Username-->
         <!--begin::Description-->
         <span class="text-gray-600 fw-bold d-block fs-7 mb-1">{{ Auth::guard('instruktur')->user()->expertise }}</span>
         <!--end::Description-->
       </div>
       <!--end::Info-->
-    </div>
+    </div> --}}
     <!--end::User-->
   </div>
   <!--end::Aside user-->
@@ -45,94 +45,31 @@
       data-kt-scroll-wrappers="#kt_aside, #kt_aside_menu, #kt_aside_menu_wrapper" data-kt-scroll-offset="0">
       <!--begin::Menu-->
       <div class="menu menu-column menu-rounded fw-bold" id="#kt_aside_menu" data-kt-menu="true">
-        <div data-kt-menu-trigger="click" class="menu-item">
-          <span class="menu-link">
+
+        <div class="menu-item">
+          <a class="menu-link" href="{{ route('instruktur.dashboard') }}">
             <span class="menu-icon">
               <!--begin::Svg Icon | path: icons/duotune/arrows/arr001.svg-->
               <span class="svg-icon svg-icon-5">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                   fill="none">
-                  <rect x="2" y="2" width="9" height="9" rx="2" fill="black">
-                  </rect>
-                  <rect opacity="0.3" x="13" y="2" width="9" height="9" rx="2"
-                    fill="black"></rect>
-                  <rect opacity="0.3" x="13" y="13" width="9" height="9" rx="2"
-                    fill="black"></rect>
-                  <rect opacity="0.3" x="2" y="13" width="9" height="9" rx="2"
-                    fill="black"></rect>
+                  <path d="M3 2H10C10.6 2 11 2.4 11 3V10C11 10.6 10.6 11 10 11H3C2.4 11 2 10.6 2 10V3C2 2.4 2.4 2 3 2Z"
+                    fill="black" />
+                  <path opacity="0.3"
+                    d="M14 2H21C21.6 2 22 2.4 22 3V10C22 10.6 21.6 11 21 11H14C13.4 11 13 10.6 13 10V3C13 2.4 13.4 2 14 2Z"
+                    fill="black" />
+                  <path opacity="0.3"
+                    d="M3 13H10C10.6 13 11 13.4 11 14V21C11 21.6 10.6 22 10 22H3C2.4 22 2 21.6 2 21V14C2 13.4 2.4 13 3 13Z"
+                    fill="black" />
+                  <path opacity="0.3"
+                    d="M14 13H21C21.6 13 22 13.4 22 14V21C22 21.6 21.6 22 21 22H14C13.4 22 13 21.6 13 21V14C13 13.4 13.4 13 14 13Z"
+                    fill="black" />
                 </svg>
               </span>
               <!--end::Svg Icon-->
             </span>
-            <span class="menu-title">Beranda</span>
-            <span class="menu-arrow"></span>
-          </span>
-          <div class="menu-sub menu-sub-accordion">
-            <div class="menu-item">
-              <a class="menu-link" href="../../demo15/dist/index.html">
-                <span class="menu-bullet">
-                  <span class="bullet bullet-dot"></span>
-                </span>
-                <span class="menu-title">Multipurpose</span>
-              </a>
-            </div>
-            <div class="menu-item">
-              <a class="menu-link" href="../../demo15/dist/dashboards/ecommerce.html">
-                <span class="menu-bullet">
-                  <span class="bullet bullet-dot"></span>
-                </span>
-                <span class="menu-title">eCommerce</span>
-              </a>
-            </div>
-            <div class="menu-item">
-              <a class="menu-link" href="../../demo15/dist/dashboards/store-analytics.html">
-                <span class="menu-bullet">
-                  <span class="bullet bullet-dot"></span>
-                </span>
-                <span class="menu-title">Store Analytics</span>
-              </a>
-            </div>
-            <div class="menu-item">
-              <a class="menu-link" href="../../demo15/dist/dashboards/logistics.html">
-                <span class="menu-bullet">
-                  <span class="bullet bullet-dot"></span>
-                </span>
-                <span class="menu-title">Logistics</span>
-              </a>
-            </div>
-            <div class="menu-item">
-              <a class="menu-link" href="../../demo15/dist/dashboards/delivery.html">
-                <span class="menu-bullet">
-                  <span class="bullet bullet-dot"></span>
-                </span>
-                <span class="menu-title">Delivery</span>
-              </a>
-            </div>
-            <div class="menu-item">
-              <a class="menu-link" href="../../demo15/dist/dashboards/marketing.html">
-                <span class="menu-bullet">
-                  <span class="bullet bullet-dot"></span>
-                </span>
-                <span class="menu-title">Marketing</span>
-              </a>
-            </div>
-            <div class="menu-item">
-              <a class="menu-link" href="../../demo15/dist/dashboards/social.html">
-                <span class="menu-bullet">
-                  <span class="bullet bullet-dot"></span>
-                </span>
-                <span class="menu-title">Social</span>
-              </a>
-            </div>
-            <div class="menu-item">
-              <a class="menu-link" href="../../demo15/dist/landing.html">
-                <span class="menu-bullet">
-                  <span class="bullet bullet-dot"></span>
-                </span>
-                <span class="menu-title">Landing</span>
-              </a>
-            </div>
-          </div>
+            <span class="menu-title">Dashboard</span>
+          </a>
         </div>
 
         <div class="menu-item">
@@ -157,47 +94,47 @@
         </div>
 
         <div class="menu-item">
-            <a class="menu-link" href="{{ route('instruktur.pre-test.index') }}">
-              <span class="menu-icon">
-                <!--begin::Svg Icon | path: icons/duotune/arrows/arr001.svg-->
-                <span class="svg-icon svg-icon-5">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                    fill="none">
-                    <path opacity="0.3"
-                      d="M20 15H4C2.9 15 2 14.1 2 13V7C2 6.4 2.4 6 3 6H21C21.6 6 22 6.4 22 7V13C22 14.1 21.1 15 20 15ZM13 12H11C10.5 12 10 12.4 10 13V16C10 16.5 10.4 17 11 17H13C13.6 17 14 16.6 14 16V13C14 12.4 13.6 12 13 12Z"
-                      fill="black"></path>
-                    <path
-                      d="M14 6V5H10V6H8V5C8 3.9 8.9 3 10 3H14C15.1 3 16 3.9 16 5V6H14ZM20 15H14V16C14 16.6 13.5 17 13 17H11C10.5 17 10 16.6 10 16V15H4C3.6 15 3.3 14.9 3 14.7V18C3 19.1 3.9 20 5 20H19C20.1 20 21 19.1 21 18V14.7C20.7 14.9 20.4 15 20 15Z"
-                      fill="black"></path>
-                  </svg>
-                </span>
-                <!--end::Svg Icon-->
+          <a class="menu-link" href="{{ route('instruktur.pre-test.index') }}">
+            <span class="menu-icon">
+              <!--begin::Svg Icon | path: icons/duotune/arrows/arr001.svg-->
+              <span class="svg-icon svg-icon-5">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                  fill="none">
+                  <path opacity="0.3"
+                    d="M20 15H4C2.9 15 2 14.1 2 13V7C2 6.4 2.4 6 3 6H21C21.6 6 22 6.4 22 7V13C22 14.1 21.1 15 20 15ZM13 12H11C10.5 12 10 12.4 10 13V16C10 16.5 10.4 17 11 17H13C13.6 17 14 16.6 14 16V13C14 12.4 13.6 12 13 12Z"
+                    fill="black"></path>
+                  <path
+                    d="M14 6V5H10V6H8V5C8 3.9 8.9 3 10 3H14C15.1 3 16 3.9 16 5V6H14ZM20 15H14V16C14 16.6 13.5 17 13 17H11C10.5 17 10 16.6 10 16V15H4C3.6 15 3.3 14.9 3 14.7V18C3 19.1 3.9 20 5 20H19C20.1 20 21 19.1 21 18V14.7C20.7 14.9 20.4 15 20 15Z"
+                    fill="black"></path>
+                </svg>
               </span>
-              <span class="menu-title">Pre Test</span>
-            </a>
-          </div>
+              <!--end::Svg Icon-->
+            </span>
+            <span class="menu-title">Pre Test</span>
+          </a>
+        </div>
 
 
-          <div class="menu-item">
-            <a class="menu-link" href="{{ route('instruktur.post-test.index') }}">
-              <span class="menu-icon">
-                <!--begin::Svg Icon | path: icons/duotune/arrows/arr001.svg-->
-                <span class="svg-icon svg-icon-5">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                    fill="none">
-                    <path opacity="0.3"
-                      d="M20 15H4C2.9 15 2 14.1 2 13V7C2 6.4 2.4 6 3 6H21C21.6 6 22 6.4 22 7V13C22 14.1 21.1 15 20 15ZM13 12H11C10.5 12 10 12.4 10 13V16C10 16.5 10.4 17 11 17H13C13.6 17 14 16.6 14 16V13C14 12.4 13.6 12 13 12Z"
-                      fill="black"></path>
-                    <path
-                      d="M14 6V5H10V6H8V5C8 3.9 8.9 3 10 3H14C15.1 3 16 3.9 16 5V6H14ZM20 15H14V16C14 16.6 13.5 17 13 17H11C10.5 17 10 16.6 10 16V15H4C3.6 15 3.3 14.9 3 14.7V18C3 19.1 3.9 20 5 20H19C20.1 20 21 19.1 21 18V14.7C20.7 14.9 20.4 15 20 15Z"
-                      fill="black"></path>
-                  </svg>
-                </span>
-                <!--end::Svg Icon-->
+        <div class="menu-item">
+          <a class="menu-link" href="{{ route('instruktur.post-test.index') }}">
+            <span class="menu-icon">
+              <!--begin::Svg Icon | path: icons/duotune/arrows/arr001.svg-->
+              <span class="svg-icon svg-icon-5">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                  fill="none">
+                  <path opacity="0.3"
+                    d="M20 15H4C2.9 15 2 14.1 2 13V7C2 6.4 2.4 6 3 6H21C21.6 6 22 6.4 22 7V13C22 14.1 21.1 15 20 15ZM13 12H11C10.5 12 10 12.4 10 13V16C10 16.5 10.4 17 11 17H13C13.6 17 14 16.6 14 16V13C14 12.4 13.6 12 13 12Z"
+                    fill="black"></path>
+                  <path
+                    d="M14 6V5H10V6H8V5C8 3.9 8.9 3 10 3H14C15.1 3 16 3.9 16 5V6H14ZM20 15H14V16C14 16.6 13.5 17 13 17H11C10.5 17 10 16.6 10 16V15H4C3.6 15 3.3 14.9 3 14.7V18C3 19.1 3.9 20 5 20H19C20.1 20 21 19.1 21 18V14.7C20.7 14.9 20.4 15 20 15Z"
+                    fill="black"></path>
+                </svg>
               </span>
-              <span class="menu-title">Post Test</span>
-            </a>
-          </div>
+              <!--end::Svg Icon-->
+            </span>
+            <span class="menu-title">Post Test</span>
+          </a>
+        </div>
 
 
 

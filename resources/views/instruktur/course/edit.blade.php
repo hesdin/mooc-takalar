@@ -5,8 +5,10 @@
     <!--begin::Container-->
     <div class="container-fluid" id="kt_content_container">
       <!--begin::Form-->
-      <form action="{{ route('instruktur.courses.store') }}" method="POST" enctype="multipart/form-data"
+      <form action="{{ route('instruktur.courses.update', ['course' => $course->uuid]) }}" method="POST"
+        enctype="multipart/form-data"
         class="form d-flex flex-column flex-lg-row fv-plugins-bootstrap5 fv-plugins-framework">
+        @method('PATCH')
         @csrf
         <!--begin::Aside column-->
         <div class="d-flex flex-column gap-7 gap-lg-10 w-100 w-lg-300px mb-7 me-lg-10">
@@ -25,7 +27,7 @@
             <div class="card-body text-center pt-0">
               <!--begin::Image input-->
               <div class="image-input image-input-empty image-input-outline mb-3" data-kt-image-input="true"
-                style="background-image: url(https://kluban.net/wp-content/uploads/2015/05/blank-thumbnail.jpg)">
+                style="background-image: url({{ asset('storage/images/course/' . $course->image) }})">
                 <!--begin::Preview existing avatar-->
                 <div class="image-input-wrapper" style="width: 220px;"></div>
                 <!--end::Preview existing avatar-->
@@ -35,7 +37,7 @@
                   data-bs-original-title="Change image">
                   <i class="bi bi-pencil-fill fs-7"></i>
                   <!--begin::Inputs-->
-                  <input type="file" name="image" accept=".png, .jpg, .jpeg" required>
+                  <input type="file" name="image" accept=".png, .jpg, .jpeg">
                   <input type="hidden" name="image_remove">
                   <!--end::Inputs-->
                 </label>
@@ -57,7 +59,7 @@
               </div>
               <!--end::Image input-->
               <!--begin::Description-->
-              <div class="text-dark fs-7 required">Unggah gambar kursus. Hanya file gambar *.png, *.jpg dan
+              <div class="text-dark fs-7 required">Edit gambar kursus. Hanya file gambar *.png, *.jpg dan
                 *.jpeg
               </div>
               <!--end::Description-->
@@ -83,15 +85,16 @@
               <!--begin::Label-->
               <label class="required form-label">Kategori Kursus</label>
               <!--end::Label-->
-              <select class="form-select" name="category_id" required>
-                <option disabled selected value="">Pilih Kategori</option>
+              <!--begin::Select2-->
+              <select class="form-select" aria-label="Default select example" name="category_id">
+                <option disabled selected>Pilih Kategori</option>
                 @foreach ($categories as $category)
-                  <option value="{{ $category->id }}">
+                  <option value="{{ $category->id }}" {{ $course->category->id == $category->id ? 'selected' : '' }}>
                     {{ $category->name }}
                   </option>
                 @endforeach
               </select>
-
+              <!--end::Select2-->
             </div>
             <!--end::Card body-->
           </div>
@@ -123,8 +126,8 @@
                       <label class="required form-label">Judul Kursus</label>
                       <!--end::Label-->
                       <!--begin::Input-->
-                      <input type="text" name="title" class="form-control mb-2" placeholder="Judul Kursus"
-                        name="title" required>
+                      <input type="text" name="title" class="form-control mb-2" name="title"
+                        value="{{ $course->title }}" required>
                       <!--end::Input-->
                       <!--begin::Description-->
                       {{-- <div class="text-muted fs-7">Judul Kursus is required.</div> --}}
@@ -137,7 +140,7 @@
                       <label class="required form-label">Subtitle Kursus</label>
                       <!--end::Label-->
                       <!--begin::Input-->
-                      <textarea class="form-control mb-2" name="sub_title" id="sub_title" cols="30" rows="3" required></textarea>
+                      <textarea class="form-control mb-2" name="sub_title" id="sub_title" cols="30" rows="3" required>{{ $course->sub_title }}</textarea>
                       <!--end::Input-->
                       <!--begin::Description-->
                       {{-- <div class="text-muted fs-7">Subtitle Kursus is required.</div> --}}
@@ -148,7 +151,7 @@
                     <!--begin::Input group-->
                     <div class="form-group">
                       <label for="content" class="form-label">Deskripsi</label>
-                      <textarea class="ckeditor form-control" name="description"></textarea>
+                      <textarea class="ckeditor form-control" name="description">{{ $course->description }}</textarea>
                     </div>
 
                     <!--end::Input group-->
@@ -168,7 +171,7 @@
             <!--end::Button-->
             <!--begin::Button-->
             <button type="submit" class="btn btn-primary">
-              Simpan
+              Update
             </button>
             <!--end::Button-->
           </div>

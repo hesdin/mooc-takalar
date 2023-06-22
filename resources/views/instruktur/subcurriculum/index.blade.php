@@ -30,7 +30,7 @@
               </span>
               <!--end::Svg Icon-->
               <input type="text" data-kt-filter="search" class="form-control form-control-solid w-250px ps-14"
-                placeholder="Search Curriculum" />
+                placeholder="Search Subcurriculum" />
             </div>
             <!--end::Search-->
           </div>
