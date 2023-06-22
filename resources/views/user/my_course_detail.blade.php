@@ -83,11 +83,15 @@
                     aria-selected="true">Tanya Jawab</a>
             </li>
 
+            <li class="nav-item">
+                <a class="nav-link" id="scores-tab"
+                    data-bs-toggle="pill" href="#scores" role="tab" aria-controls="scores"
+                    aria-selected="true">Nilai Quiz</a>
+            </li>
+
         </ul>
 
-        <div class="tab-content" id="pills-tabContent">
-
-
+        <div class="tab-content mb-10" id="pills-tabContent">
             <div class="tab-pane fade {{ Session::has('commented') ? '' : 'show active' }}" id="pills-curriculum"
                 role="tabpanel" aria-labelledby="pills-curriculum-tab">
                 <div id="accordionCurriculum">
@@ -122,12 +126,14 @@
                                 @foreach ($curriculum->subcurriculum as $subcurriculum)
                                     <div class="border-top px-5 py-4 min-height-70 d-md-flex align-items-center">
                                         <div class="d-flex align-items-center me-auto mb-4 mb-md-0">
-                                            <div class="text-secondary d-flex">
-                                                <!-- Add your subcurriculum icon here if needed -->
-                                            </div>
                                             <div class="ms-4">
                                                 {{ $subcurriculum->title }}
                                             </div>
+                                            @if ($subcurriculum->finished->where('user_id', auth()->user()->id)->first())
+                                                <div class="ms-4">
+                                                    <span class="badge badge-primary">Selesai</span>
+                                                </div>
+                                            @endif
                                         </div>
                                         <div
                                             class="d-flex align-items-center overflow-auto overflow-md-visible flex-shrink-all">
@@ -142,12 +148,43 @@
                                                     Document
                                                 </div>
                                             @endif
+                                            @if ($subcurriculum->finished->where('user_id', auth()->user()->id)->first())
+                                                <button class="btn btn-xs btn-rounded-circle btn-secondary" disabled>
+                                                    <i class="fas fa-check"></i>
+                                                </button>
+                                            @else
+                                                <form
+                                                    action="{{ route('guru.mycourse.subcurriculum', $course->uuid) }}"
+                                                    method="post">
+                                                    @csrf
+                                                    <input type="hidden" name="subcurriculum"
+                                                        value="{{ $subcurriculum->id }}">
+                                                    <button class="btn btn-xs btn-rounded-circle btn-success"
+                                                        type="submit">
+                                                        <i class="fas fa-check"></i>
+                                                    </button>
+                                                </form>
+                                            @endif
                                         </div>
                                     </div>
                                 @endforeach
                             </div>
                         </div>
                     @endforeach
+
+                    @if ($course->postTest && $finished->count() == $course->subcurriculum->count() && !$postTestCheck)
+                        <div class="border rounded shadow mb-6 overflow-hidden">
+                            <div class="d-flex align-items-center">
+                                <h5 class="mb-0 w-100">
+                                    <div class="d-flex align-items-center p-5 min-height-80 text-dark fw-medium line-height-one justify-content-center">
+                                        <button class="btn btn-primary btn-sm px-10" onclick="document.location.href = '{{ route('guru.mycourse.post_test', $course->uuid) }}'">
+                                            Quiz Post Test
+                                        </button>
+                                    </div>
+                                </h5>
+                            </div>
+                        </div>
+                    @endif
                 </div>
             </div>
 
@@ -167,11 +204,13 @@
                                         <h5 class="mb-0">{{ $comment->guru->nama }}</h5>
                                         <p class="font-size-sm font-italic">{{ $comment->curriculum->title }}</p>
                                     </div>
-                                    <span>{{ Carbon\Carbon::parse($comment->created_at)->isoFormat('HH:mm') }} pada {{ Carbon\Carbon::parse($comment->created_at)->isoFormat('DD MMMM YYYY') }}</span>
+                                    <span>{{ Carbon\Carbon::parse($comment->created_at)->isoFormat('HH:mm') }} pada
+                                        {{ Carbon\Carbon::parse($comment->created_at)->isoFormat('DD MMMM YYYY') }}</span>
                                 </div>
                                 <p class="line-height-md mb-2">{{ $comment->comment_text }}</p>
 
-                                <a href="{{ route('guru.mycourse.comment-replies', ['uuid' => $course->uuid, 'id' => $comment->id]) }}" class="btn btn-info py-0">Reply</a>
+                                <a href="{{ route('guru.mycourse.comment-replies', ['uuid' => $course->uuid, 'id' => $comment->id]) }}"
+                                    class="btn btn-info py-0">Reply</a>
                                 <span class="ms-3">{{ $comment->replies->count() }} balasan</span>
                             </div>
                         </li>
@@ -201,6 +240,36 @@
 
                         <button type="submit" class="btn btn-primary btn-block mw-md-300p py-3">SUBMIT</button>
                     </form>
+                </div>
+            </div>
+
+            <div class="tab-pane fade" id="scores"
+                role="tabpanel" aria-labelledby="scores-tab">
+
+                <h3 class="mb-6">Nilai Quiz</h3>
+                <div class="row align-items-center mb-8">
+                    <div class="col mb-5 mb-md-0">
+                        <div class="border rounded shadow d-flex align-items-center justify-content-center px-9 py-8">
+                            <div class="m-2 text-center">
+                                <h1 class="display-2 mb-0 fw-medium mb-n1">{{ $preTest->result->where('user_id', auth()->user()->id)->first()->score }}</h1>
+                                <h5 class="mb-0">Pre Test</h5>
+                                <div class="star-rating">
+                                    <div class="rating" style="width:{{ $preTest->result->where('user_id', auth()->user()->id)->first()->score }}%;"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col mb-5 mb-md-0">
+                        <div class="border rounded shadow d-flex align-items-center justify-content-center px-9 py-8">
+                            <div class="m-2 text-center">
+                                <h1 class="display-2 mb-0 fw-medium mb-n1">{{ $postTest->result->where('user_id', auth()->user()->id)->first() ? $postTest->result->where('user_id', auth()->user()->id)->first()->score : 'N/A' }}</h1>
+                                <h5 class="mb-0">Post Test</h5>
+                                <div class="star-rating">
+                                    <div class="rating" style="width:{{ $postTest->result->where('user_id', auth()->user()->id)->first() ? $postTest->result->where('user_id', auth()->user()->id)->first()->score : 0 }}%;"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

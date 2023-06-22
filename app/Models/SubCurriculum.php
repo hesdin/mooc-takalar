@@ -14,4 +14,9 @@ class SubCurriculum extends Model
     {
         return $this->belongsTo(Curriculum::class);
     }
+
+    public function finished()
+    {
+        return $this->hasMany(FinishedSubCurriculum::class);
+    }
 }
