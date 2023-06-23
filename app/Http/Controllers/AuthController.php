@@ -22,10 +22,13 @@ class AuthController extends Controller
         $guard = null;
         if (Auth::guard('admin')->attempt($credentials)) {
             $guard = 'admin';
+            dd($guard);
         } elseif (Auth::guard('guru')->attempt(['nip' => $request->username, 'password' => $request->password])) {
             $guard = 'guru';
+            dd($guard);
         } elseif (Auth::guard('instruktur')->attempt($credentials)) {
             $guard = 'instruktur';
+            dd($guard);
         }
 
         if ($guard) {
