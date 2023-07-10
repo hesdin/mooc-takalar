@@ -2,27 +2,27 @@
 
 
 @section('content')
-  <header class="py-8 py-lg-12 mb-8 overlay overlay-primary overlay-80"
+  <header class="py-4 py-md-7 py-lg-7 mb-8 overlay overlay-primary overlay-80"
     style="background-image: url(assets/img/covers/cover-19.jpg);">
     <div class="container text-start py-xl-5">
       <h1 class="display-4 fw-semi-bold mb-0 text-white">Semua Kursus</h1>
-
     </div>
     <!-- Img -->
     <img class="d-none img-fluid" src="...html" alt="...">
   </header>
 
+
   {{-- Control Bar ============================================ --}}
   <div class="container mb-6 mb-xl-8 z-index-2">
     <div class="d-xl-flex align-items-center">
-      <p class="mb-xl-0">We found <span class="text-dark">834 courses</span> available for you</p>
+      <p class="mb-xl-0">Ada <span class="text-dark">{{ $courses->count() }} Kursus</span> yang tersedia.</p>
       <div class="ms-xl-auto d-xl-flex flex-wrap">
         <div class="mb-4 mb-xl-0 ms-xl-6">
           <!-- Search -->
-          <form class="">
+          <form class="" action="{{ route('course.all') }}" method="GET" id="filterForm">
             <div class="input-group input-group-filter">
-              <input class="form-control form-control-sm placeholder-dark border-end-0" type="search"
-                placeholder="Search our courses" aria-label="Search">
+              <input class="form-control form-control-sm placeholder-dark border-end-0" type="search" name="search"
+                placeholder="Cari kursus" aria-label="Search" value="{{ $search ?? '' }}">
               <div class="input-group-append">
                 <button class="btn btn-sm btn-outline-white border-start-0 text-dark bg-transparent" type="submit">
                   <!-- Icon -->
@@ -32,87 +32,39 @@
                       d="M8.80758 0C3.95121 0 0 3.95121 0 8.80758C0 13.6642 3.95121 17.6152 8.80758 17.6152C13.6642 17.6152 17.6152 13.6642 17.6152 8.80758C17.6152 3.95121 13.6642 0 8.80758 0ZM8.80758 15.9892C4.8477 15.9892 1.62602 12.7675 1.62602 8.80762C1.62602 4.84773 4.8477 1.62602 8.80758 1.62602C12.7675 1.62602 15.9891 4.8477 15.9891 8.80758C15.9891 12.7675 12.7675 15.9892 8.80758 15.9892Z"
                       fill="currentColor"></path>
                     <path
-                      d="M19.762 18.6121L15.1007 13.9509C14.7831 13.6332 14.2687 13.6332 13.9511 13.9509C13.6335 14.2682 13.6335 14.7831 13.9511 15.1005L18.6124 19.7617C18.7712 19.9205 18.9791 19.9999 19.1872 19.9999C19.395 19.9999 19.6032 19.9205 19.762 19.7617C20.0796 19.4444 20.0796 18.9295 19.762 18.6121Z"
+                      d="M19.762 18.6121L15.1007 13.9509C14.7831 13.6332 14.2687 13.6332 13.9511 13.9509C13.6335 14.2682 13.6335 14.7831 13.9511 15.1005L18.6124 19.7617C18.7712 19.9205 18.9791 19.9999 19.1872 19.9999C19.395 19.9999 19.6032 19.9205 19.762 19.7617C20.0797 19.4443 20.0797 18.9294 19.762 18.6121Z"
                       fill="currentColor"></path>
                   </svg>
-
                 </button>
               </div>
             </div>
-          </form>
+
+
         </div>
 
         <div class="mb-4 mb-xl-0 ms-xl-6">
-          <div class="choices" data-type="select-one" tabindex="0" role="listbox" aria-haspopup="true"
-            aria-expanded="false">
-            <div class="form-select form-select-sm text-dark shadow-none dropdown-menu-end"><select
-                class="form-select form-select-sm text-dark shadow-none dropdown-menu-end choices__input" data-choices=""
-                hidden="" tabindex="-1" data-choice="active">
-                <option value="All Categories">All Categories</option>
-              </select>
-              <div class="none none">
-                <div class="choices__item choices__item--selectable" data-item="" data-id="1"
-                  data-value="All Categories" data-custom-properties="null" aria-selected="true">All Categories</div>
-              </div>
-            </div>
-            <div class="none dropdown-menu" aria-expanded="false">
-              <div class="none" role="listbox">
-                <div id="choices--mm83-item-choice-1"
-                  class="choices__item dropdown-item active choices__item--selectable is-highlighted" role="option"
-                  data-choice="" data-id="1" data-value="All Categories" data-select-text="Press to select"
-                  data-choice-selectable="" aria-selected="true">All Categories</div>
-                <div id="choices--mm83-item-choice-2" class="choices__item dropdown-item choices__item--selectable"
-                  role="option" data-choice="" data-id="2" data-value="Another option"
-                  data-select-text="Press to select" data-choice-selectable="" aria-selected="false">Another option</div>
-                <div id="choices--mm83-item-choice-3" class="choices__item dropdown-item choices__item--selectable"
-                  role="option" data-choice="" data-id="3" data-value="Something else here"
-                  data-select-text="Press to select" data-choice-selectable="" aria-selected="false">Something else here
-                </div>
-              </div>
-            </div>
-          </div>
+          <select class="form-select form-select-sm" name="category" onchange="submitForm()">
+            <option value="" selected>Semua Kategori</option>
+            @foreach ($categories as $category)
+              <option value="{{ $category->id }}" {{ $category->id == $selectedCategory ? 'selected' : '' }}>
+                {{ $category->name }}
+              </option>
+            @endforeach
+          </select>
         </div>
 
+
+
         <div class="mb-4 mb-xl-0 ms-xl-6">
-          <div class="border rounded d-flex align-items-center choices-label h-50p">
-            <span class="ps-5">Sort by:</span>
-            <div class="choices" data-type="select-one" tabindex="0" role="listbox" aria-haspopup="true"
-              aria-expanded="false">
-              <div
-                class="form-select form-select-sm text-dark border-0 ps-1 bg-transparent flex-grow-1 shadow-none dropdown-menu-end">
-                <select
-                  class="form-select form-select-sm text-dark border-0 ps-1 bg-transparent flex-grow-1 shadow-none dropdown-menu-end choices__input"
-                  data-choices="" hidden="" tabindex="-1" data-choice="active">
-                  <option value="Default">Default</option>
-                </select>
-                <div class="none none">
-                  <div class="choices__item choices__item--selectable" data-item="" data-id="1"
-                    data-value="Default" data-custom-properties="null" aria-selected="true">Default</div>
-                </div>
-              </div>
-              <div class="none dropdown-menu" aria-expanded="false">
-                <div class="none" role="listbox">
-                  <div id="choices--bntd-item-choice-1"
-                    class="choices__item dropdown-item active choices__item--selectable is-highlighted" role="option"
-                    data-choice="" data-id="1" data-value="Default" data-select-text="Press to select"
-                    data-choice-selectable="" aria-selected="true">Default</div>
-                  <div id="choices--bntd-item-choice-2" class="choices__item dropdown-item choices__item--selectable"
-                    role="option" data-choice="" data-id="2" data-value="New Courses"
-                    data-select-text="Press to select" data-choice-selectable="" aria-selected="false">New Courses
-                  </div>
-                  <div id="choices--bntd-item-choice-3" class="choices__item dropdown-item choices__item--selectable"
-                    role="option" data-choice="" data-id="3" data-value="Price High to low"
-                    data-select-text="Press to select" data-choice-selectable="" aria-selected="false">Price High to
-                    low</div>
-                  <div id="choices--bntd-item-choice-4" class="choices__item dropdown-item choices__item--selectable"
-                    role="option" data-choice="" data-id="4" data-value="Price Low to High"
-                    data-select-text="Press to select" data-choice-selectable="" aria-selected="false">Price Low to
-                    High</div>
-                </div>
-              </div>
-            </div>
-          </div>
+          <select class="form-select form-select-sm" name="order_by" onchange="submitForm()">
+            <option value="" selected>Urutkan Berdasarkan</option>
+            <option value="terbaru" {{ $orderBy == 'terbaru' ? 'selected' : '' }}>Terbaru</option>
+            <option value="terpopuler" {{ $orderBy == 'terpopuler' ? 'selected' : '' }}>Terpopuler</option>
+          </select>
         </div>
+
+        </form>
+
       </div>
     </div>
   </div>
@@ -120,7 +72,8 @@
   {{-- Course ================================================= --}}
   <div class="container pb-4 pb-xl-7">
     <div class="row row-cols-md-2 row-cols-xl-3 mb-6 mb-xl-3">
-      @foreach ($courses as $course)
+
+      @forelse ($courses as $course)
         <div class="col-md pb-4 pb-md-7">
           <!-- Card -->
           <div class="card card-border-hover border shadow-dark-hover p-2 lift sk-fade">
@@ -152,9 +105,15 @@
 
               <!-- Heading -->
               <div class="position-relative">
-                <a href="course-single-v5.html" class="d-block stretched-link">
+                <a href="course-single-v2.html" class="d-block stretched-link">
                   <h4 class="line-clamp-2 h-md-48 h-lg-58 me-md-6 me-lg-10 me-xl-4 mb-2">{{ $course->title }}</h4>
                 </a>
+
+                <div class="d-lg-flex align-items-end flex-wrap mb-2">
+                  <div class="font-size-sm text-dark">
+                    <span>{{ $course->enrollment->count() }} Guru Mendaftar</span>
+                  </div>
+                </div>
 
 
                 <div class="row mx-n2 align-items-end">
@@ -172,7 +131,7 @@
                             </svg>
 
                           </div>
-                          <div class="font-size-sm">{{ $course->enrollment->count() }} lessons</div>
+                          <div class="font-size-sm">{{ $course->curriculum->count() }} Materi</div>
                         </div>
                       </li>
                       <li class="nav-item px-3">
@@ -189,7 +148,7 @@
                             </svg>
 
                           </div>
-                          <div class="font-size-sm">8h 12m</div>
+                          <div class="font-size-sm">{{ $course->created_at->format('d-m-Y') }}</div>
                         </div>
                       </li>
                     </ul>
@@ -201,10 +160,22 @@
             </div>
           </div>
         </div>
-      @endforeach
+      @empty
+        <div class="alert alert-light" role="alert">
+          <strong>Tidak ada kursus dengan kategori tersebut !</strong>
+        </div>
+      @endforelse
 
     </div>
 
 
   </div>
 @endsection
+
+@push('js')
+  <script>
+    function submitForm() {
+      document.getElementById('filterForm').submit();
+    }
+  </script>
+@endpush

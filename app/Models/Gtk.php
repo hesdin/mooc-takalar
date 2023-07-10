@@ -16,4 +16,9 @@ class Gtk extends Authenticatable
     {
         return $this->hasMany(Enrollment::class);
     }
+
+    public function quizResults()
+    {
+        return $this->hasMany(QuizResult::class, 'user_id');
+    }
 }

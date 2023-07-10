@@ -1,5 +1,17 @@
 @extends('app.index')
 
+@push('css')
+  <style>
+    .image-container {
+      width: 100%;
+    }
+
+    .image-container img {
+      width: 100%;
+      height: auto;
+    }
+  </style>
+@endpush
 
 @section('content')
   <div class="container-fluid" id="kt_content_container">
@@ -11,7 +23,7 @@
           <!--begin::Body-->
           <div class="card-body d-flex align-items-center pt-3 pb-0">
             <div class="d-flex flex-column flex-grow-1 py-2 py-lg-13 me-2">
-              <a href="#" class="fw-bolder text-dark display-6 mb-2 text-hover-primary">Hello
+              <a href="#" class="fw-bolder display-6 mb-2 text-primary">Hello
                 {{ Auth::guard('guru')->user()->nama }}!</a>
               <span class="text-dark fs-5">It's good to see you again</span>
             </div>
@@ -945,10 +957,14 @@
             <div class="card card-xl-stretch">
               <!--begin::Body-->
               <div class="d-flex justify-content-center">
-                <div class="card-body">
+                <div class="card-body pb-0">
                   <div class="py-1 d-flex align-items-center">
                     <div>
-                      <span class="text-dark display-3 fw-bolder">10</span>
+                      <span class="text-dark display-3 fw-bolder">
+                        {{ Auth::guard('guru')->user()->quizResults()->whereHas('quiz', function ($query) {
+                                $query->where('test_type', 'post');
+                            })->count() }}
+                        </spanclass=>
                     </div>
                     <div class="ms-2">
                       <span class="fw-bold text-dark fs-6 d-block">Kursus</span>
@@ -957,14 +973,15 @@
                   </div>
                 </div>
 
-                <div class="card-body">
+                <div class="card-body pb-0">
                   <div class="py-1 d-flex align-items-center">
                     <div>
-                      <span class="text-dark display-3 fw-bolder">3</span>
+                      <span
+                        class="text-dark display-3 fw-bolder">{{ Auth::guard('guru')->user()->enrollments->count() }}</span>
                     </div>
                     <div class="ms-2">
                       <span class="fw-bold text-dark fs-6 d-block">Kursus</span>
-                      <span class="fw-bold text-dark fs-6 d-block">Proses</span>
+                      <span class="fw-bold text-dark fs-6 d-block">Diikuti</span>
                     </div>
                   </div>
                 </div>
@@ -985,22 +1002,26 @@
               <!-- Tampilkan informasi course terbaru -->
               <div class="card">
                 <!--begin::Card body-->
-                <div class="card-body d-flex justify-content-center text-center flex-column p-8">
+                <div class="card-body d-flex justify-content-center flex-column pt-0">
                   <!--begin::Name-->
-                  <a href="#" class="text-gray-800 text-hover-primary d-flex flex-column">
+                  <div class="fs-6 fw-bold text-dark mb-3">Kursus terakhir yang diikuti</div>
+
+                  <a href="{{ route('guru.mycourse.detail', ['uuid' => $latestEnrollment->course->uuid]) }}"
+                    class="text-gray-800 text-hover-primary d-flex flex-column">
                     <!--begin::Image-->
-                    <div class="">'
-                      <img src="{{ asset('assets/media/svg/files/pdf.svg') }}" alt="">
+                    <!--begin::Image-->
+                    <div class="image-container mb-3 rounded">
+                      <img src="{{ asset('storage/images/course/' . $latestEnrollment->course->image) }}" alt=""
+                        class="rounded">
                     </div>
                     <!--end::Image-->
+                    <!--end::Image-->
                     <!--begin::Title-->
-                    <div class="fs-5 fw-bolder mb-2">Project Reqs..</div>
+                    <div class="fs-5 fw-bolder mb-1">{{ $latestEnrollment->course->title }}</div>
                     <!--end::Title-->
                   </a>
                   <!--end::Name-->
-                  <!--begin::Description-->
-                  <div class="fs-7 fw-bold text-gray-400">3 days ago</div>
-                  <!--end::Description-->
+
                 </div>
                 <!--end::Card body-->
               </div>
@@ -1008,7 +1029,7 @@
               <!-- Tampilkan jika tidak ada course terbaru -->
               <div class="card">
                 <!--begin::Card body-->
-                <div class="card-body d-flex justify-content-center text-center flex-column p-8">
+                <div class="card-body d-flex justify-content-center text-center flex-column p-8 pt-0">
                   <!--begin::Name-->
                   <a href="{{ route('course.all') }}" class="text-gray-800 text-hover-primary d-flex flex-column">
                     <!--begin::Image-->
@@ -1052,7 +1073,7 @@
           <div class="card-header align-items-center border-0 mt-4">
             <h3 class="card-title align-items-start flex-column">
               <span class="fw-bolder text-dark">Kursus</span>
-              <span class="text-muted mt-1 fw-bold fs-7">Kursus Terbaru</span>
+              <span class="mt-1 fw-bold fs-7">Daftar Kursus Terbaru</span>
             </h3>
             <div class="card-toolbar">
               <!--begin::Menu-->
@@ -1096,7 +1117,8 @@
                 <div class="d-flex flex-row-fluid align-items-center flex-wrap my-lg-0 me-2">
                   <!--begin::Title-->
                   <div class="flex-grow-1 my-lg-0 my-2 me-2">
-                    <a href="#" class="text-gray-800 fw-bolder text-hover-primary fs-6">{{ $course->title }}</a>
+                    <a href="{{ route('course.detail', ['uuid' => $course->uuid]) }}"
+                      class="text-gray-800 fw-bolder text-hover-primary fs-6">{{ $course->title }}</a>
                     <span
                       class="text-muted fw-bold d-block pt-1">{{ implode(' ', array_slice(str_word_count($course->sub_title, 1), 0, 4)) }}
                     </span>
@@ -1135,7 +1157,7 @@
       </div>
       <!--end::Col-->
       <!--begin::Col-->
-      <div class="col-xl-4 mb-5 mb-xl-10">
+      {{-- <div class="col-xl-4 mb-5 mb-xl-10">
         <!--begin::List widget 4-->
         <div class="card card-flush h-lg-100">
           <!--begin::Header-->
@@ -2154,7 +2176,7 @@
           <!--end::Body-->
         </div>
         <!--end::List widget 4-->
-      </div>
+      </div> --}}
       <!--end::Col-->
     </div>
     <!--end::Row-->

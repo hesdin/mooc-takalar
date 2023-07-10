@@ -35,6 +35,6 @@ class Instructor extends Authenticatable
 
     public function courses()
     {
-        return $this->hasMany(Course::class, 'category_id');
+        return $this->hasMany(Course::class, 'instructor_id');
     }
 }

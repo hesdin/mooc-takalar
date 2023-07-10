@@ -57,10 +57,10 @@
                       <div class="fs-6 fw-bolder">
                         <!--begin::Author-->
                         <a href="../../demo15/dist/pages/user-profile/overview.html"
-                          class="text-gray-700 text-hover-primary">{{ $course->instructor->name }}</a>
+                          class="text-gray-700 text-hover-primary">{{ Str::ucfirst($course->instructor->name) }}</a>
                         <!--end::Author-->
                         <!--begin::Date-->
-                        <span class="text-muted">on {{ $course->created_at }}</span>
+                        <span class="text-muted"> | {{ $course->created_at->format('d-m-Y') }}</span>
                         <!--end::Date-->
                       </div>
                       <!--end::Content-->

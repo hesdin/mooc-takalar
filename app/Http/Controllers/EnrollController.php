@@ -29,7 +29,7 @@ class EnrollController extends Controller
             $enrollment->course_id = $course->id;
             $enrollment->save();
 
-            return redirect()->route('guru.mycourse');
+            return redirect()->route('guru.mycourse')->with('success', 'Kamu berhasil mendaftar !');
         }
     }
 }

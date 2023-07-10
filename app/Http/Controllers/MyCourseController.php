@@ -30,9 +30,11 @@ class MyCourseController extends Controller
     {
         $course = Course::where('uuid', $uuid)->first();
         // dd($course->id);
+
         $preTestCheck = Quiz::where('course_id', $course->id)->where('test_type', 'pre')->whereHas('result', function ($query) {
             return $query->where('user_id', auth()->user()->id);
         })->first();
+
         $postTestCheck = Quiz::where('course_id', $course->id)->where('test_type', 'post')->whereHas('result', function ($query) {
             return $query->where('user_id', auth()->user()->id);
         })->first();
@@ -88,7 +90,7 @@ class MyCourseController extends Controller
         $result->score = $finalScore;
         $result->save();
 
-        return redirect()->back()->with('success', 'Pre test telah selesai');
+        return redirect()->back()->with('success', 'Pre Test selesai');
     }
 
     public function myCourseSubCurriculumDone(Request $request, $uuid)
@@ -147,7 +149,7 @@ class MyCourseController extends Controller
         $result->score = $finalScore;
         $result->save();
 
-        return redirect()->route('guru.mycourse.detail', $uuid)->with('success', 'Post test telah selesai');
+        return redirect()->route('guru.mycourse.detail', $uuid)->with('success', 'Post test selesai');
     }
 
     public function myCourseComment(Request $request)

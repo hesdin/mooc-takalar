@@ -23,7 +23,7 @@
               </svg>
 
             </div>
-            <span class="text-white fw-medium me-1">Kursus</span>
+            <span class="text-white fw-medium me-1">KURSUS</span>
           </div>
         </a>
 
@@ -451,10 +451,12 @@
                     <!-- List -->
                     <a class="dropdown-item" href="{{ route('course.detail', ['uuid' => $enrollment->course->uuid]) }}">
                       <img src="{{ asset('storage/images/course/' . $enrollment->course->image) }}"
-                        class="img-fluid shadow rounded border d-flex mx-auto mb-5" alt="..."
-                        style="width: 100%; height: auto;">
+                        class="img-fluid shadow rounded border d-flex mb-5 h-md-152" alt="...">
                       <!-- Heading -->
-                      <h6 class="text-center mb-0">{{ $enrollment->course->title }}</h6>
+                      <h6 class="text-start mb-0 course-title">
+                        {{ substr($enrollment->course->title, 0, 40) }}{{ strlen($enrollment->course->title) > 40 ? '...' : '' }}
+                      </h6>
+
                     </a>
                   </div>
                 @endforeach
@@ -462,10 +464,8 @@
               <div class="row row-cols-2 row-cols-md-4 row-cols-lg-5 row-cols-xl-6">
                 <div class="col mb-3 col-wd-auto">
                   <!-- List -->
-                  <a class="dropdown-item" href="{{ route('guru.mycourse') }}">
-                    <!-- Heading -->
-                    <h6 class="text-center mb-0">Semua Kursus Pembelajaran</h6>
-                  </a>
+                  <a href="{{ route('guru.mycourse') }}" class="btn btn-primary btn-block mw-md-300p py-3">
+                    BUKA PEMBELAJARAN SAYA</a>
                 </div>
               </div>
             </div>
@@ -497,10 +497,10 @@
         </li>
 
         <li class="nav-item dropdown">
-          <a class="nav-link text-dark dropdown-toggle px-xl-4" id="navbarPages" data-bs-toggle="dropdown"
+          {{-- <a class="nav-link text-dark dropdown-toggle px-xl-4" id="navbarPages" data-bs-toggle="dropdown"
             href="#" aria-haspopup="true" aria-expanded="false">
             Topik
-          </a>
+          </a> --}}
           <div class="dropdown-menu border-xl shadow-none dropdown-menu-lg" aria-labelledby="navbarPages">
             <div class="row gx-0">
               <div class="col-6">
@@ -525,7 +525,8 @@
     </div>
 
     <!-- Search -->
-    <form class="d-none d-wd-flex ms-auto w-xl-350p">
+    <form class="d-none d-wd-flex ms-auto w-xl-350p" action="{{ route('course.all') }}" method="GET" id="filterForm">
+
       <div class="input-group bg-white rounded-pill overflow-hidden">
         <div class="input-group-prepend">
           <button class="btn btn-sm my-2 my-sm-0 text-secondary icon-xs d-flex align-items-center" type="submit">
@@ -542,10 +543,11 @@
 
           </button>
         </div>
-        <input class="form-control form-control-sm border-0 ps-0" type="search"
-          placeholder="What do you want to learn ?" aria-label="Search">
+        <input class="form-control form-control-sm border-0 ps-0" type="search" placeholder="Cari kursus"
+          name="search" aria-label="Search" value="{{ $search ?? '' }}">
       </div>
     </form>
+
 
     <!-- Search, Account & Cart -->
     <ul class="navbar-nav flex-row ms-auto ms-xl-0 me-n2 me-md-n4">

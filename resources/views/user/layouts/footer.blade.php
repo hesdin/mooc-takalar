@@ -193,7 +193,7 @@
             <ul
               class="navbar-nav flex-row flex-wrap font-size-sm-alone mb-3 mb-md-0 mx-n4 justify-content-center justify-content-lg-start order-1 order-md-0">
               <li class="nav-item py-2 py-md-0 px-0 border-top-0">
-                <a href="#" class="nav-link px-4 fw-normal text-gray-800">Kabupate Takalar</a>
+                <a href="#" class="nav-link px-4 fw-normal text-gray-800">Kabupaten Takalar</a>
               </li>
             </ul>
           </div>

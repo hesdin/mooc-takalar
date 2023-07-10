@@ -44,7 +44,7 @@
                 <th>#</th>
                 <th>Kursus</th>
                 <th>Kategori</th>
-                <th>Joined At</th>
+                <th>Mendaftar</th>
                 <th class="text-end">Actions</th>
               </tr>
             </thead>
@@ -54,25 +54,49 @@
                   <td>{{ $enrollment->course->id }}</td>
                   <td class="d-flex align-items-center">
                     <!--begin:: Thumbnail -->
-                    <div class="symbol me-5 symbol-square">
-                      <img src="{{ asset('storage/images/course/' . $enrollment->course->image) }}"
-                        alt="{{ $enrollment->course->name }}">
-                      {{-- <img src="assets/media/stock/600x400/img-26.jpg" class="" alt=""> --}}
+                    <div class="symbol symbol-60px symbol-2by3 me-4">
+                      <div class="symbol-label"
+                        style="background-image: url('{{ asset('storage/images/course/' . $enrollment->course->image) }}')">
+                      </div>
                     </div>
                     <!--end::Thumbnail-->
-                    <!--begin::User details-->
-                    <div class="d-flex flex-column">
-                      <a href="{{ route('instruktur.courses.curriculum.index', ['course' => $enrollment->course->id]) }}"
-                        class="text-gray-800 text-hover-primary fs-6 fw-bolder mb-1">{{ Str::ucfirst($enrollment->course->title) }}</a>
-                      <span>
-                        {{ implode(' ', array_slice(str_word_count($enrollment->course->sub_title, 1), 0, 4)) }}
-                        <div class="progress" style="height: 5px;">
-                          <div class="progress-bar" role="progressbar" style="width: 32%" aria-valuenow="32"
-                            aria-valuemin="0" aria-valuemax="100"></div>
-                        </div>
-                      </span>
+                    <!--begin::Course details-->
+                    <div class="flex-grow-1 me-2">
+                      <a href="{{ route('guru.mycourse.detail', ['uuid' => $enrollment->course->uuid]) }}"
+                        class="text-gray-800 fw-bolder text-hover-primary fs-6">{{ Str::ucfirst($enrollment->course->title) }}</a>
+
+                      @php
+                        $sub_curiculum = $enrollment->course->subcurriculum->count();
+                        $finished = 0;
+                        
+                        foreach ($enrollment->course->subcurriculum as $subcurriculum) {
+                            $finished += $subcurriculum->finished->count();
+                        }
+                        
+                        $persentasi = 0; // Default value
+                        
+                        if ($finished > 0) {
+                            $persentasi = ($finished / $sub_curiculum) * 100;
+                        }
+                      @endphp
+
+                      <div class="d-flex flex-stack mb-2">
+                        <span class="text-dark me-2 fs-7 fw-bold">{{ $persentasi }}% selesai</span>
+                      </div>
+
+                      <div class="progress h-6px w-100">
+                        <div class="progress-bar bg-success" role="progressbar" style="width: {{ $persentasi }}%"
+                          aria-valuenow="{{ $persentasi }}" aria-valuemin="0" aria-valuemax="100"></div>
+                      </div>
+
+                      {{-- <span class="text-muted fw-bold d-block pt-1">
+
+                        Persentasi: {{ $persentasi }}
+
+                      </span> --}}
+
                     </div>
-                    <!--begin::User details-->
+                    <!--begin::Course details-->
                   </td>
 
                   <td>

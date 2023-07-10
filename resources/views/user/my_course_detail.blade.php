@@ -21,7 +21,7 @@
 
   @include('user.layouts.css')
 
-  <title>Skola</title>
+  <title>MOOC - Kabupaten Takalar</title>
 
 </head>
 
@@ -40,7 +40,7 @@
         </a>
 
         <!-- Lesson Title -->
-        <div class="ms-md-6 ms-wd-12 ms-xl-10 me-auto mb-5 mb-md-0">
+        <div class="me-auto mb-5 mb-md-0">
           <h3 class="mb-0 line-clamp-2 ms-wd-3">{{ $course->title }}</h3>
         </div>
 
@@ -54,21 +54,20 @@
 
   <!-- COURSE
     ================================================== -->
-  <div class="mt-15 mt-md-11 pt-md-3">
-    <div class="">
-      <div class="row mb-6">
-        <div class="col-lg-11 col-wd-12 ms-lg-auto me-lg-auto pt-11 pt-lg-8">
-          <h2 class="font-size-xl">Materi Kursus</h2>
-          <div id="content-container"></div>
-        </div>
+  <div class="container mt-15 mt-md-11 pt-md-3">
+    <div class="row mb-3">
+      <div class="col-lg-11 col-wd-12 pt-9 pt-lg-6">
+        <h2 class="font-size-xl">Materi Kursus</h2>
       </div>
     </div>
   </div>
 
+  <div id="content-container" class="d-none"></div>
+
   <!-- COURSE INFO TAB
                 ================================================== -->
   <div class="container">
-    <ul id="pills-tab" class="nav course-tab-v1 border-bottom h4 my-8 pt-1" role="tablist">
+    <ul id="pills-tab" class="nav course-tab-v1 border-bottom h4 mb-4 mt-0 pt-1" role="tablist">
       <li class="nav-item">
         <a class="nav-link {{ Session::has('commented') ? '' : 'active' }}" id="pills-overview-tab"
           data-bs-toggle="pill" href="#pills-curriculum" role="tab" aria-controls="pills-overview"
@@ -91,6 +90,32 @@
       <div class="tab-pane fade {{ Session::has('commented') ? '' : 'show active' }}" id="pills-curriculum"
         role="tabpanel" aria-labelledby="pills-curriculum-tab">
         <div id="accordionCurriculum">
+
+          @if ($finished->count() != $course->subcurriculum->count())
+            <div class="alert alert-info border text-dark" role="alert">
+              Centang materi yang sudah selesai dengan klik ikon <button class="btn btn-xs btn-rounded-circle btn-dark"
+                type="submit">
+                <i class="fas fa-check"></i>
+              </button>
+            </div>
+          @endif
+
+          @if ($course->postTest && $finished->count() == $course->subcurriculum->count() && !$postTestCheck)
+            <div class="border rounded shadow mb-6 overflow-hidden">
+              <div class="d-flex align-items-center">
+                <h5 class="mb-0 w-100">
+                  <div
+                    class="d-flex align-items-center p-5 min-height-80 text-dark fw-medium line-height-one justify-content-center">
+                    <button class="btn btn-primary btn-sm px-10"
+                      onclick="document.location.href = '{{ route('guru.mycourse.post_test', $course->uuid) }}'">
+                      Quiz Post Test
+                    </button>
+                  </div>
+                </h5>
+              </div>
+            </div>
+          @endif
+
           @foreach ($course->curriculum as $curriculum)
             <div class="border rounded shadow mb-6 overflow-hidden">
               <div class="d-flex align-items-center" id="curriculumheading{{ $curriculum->id }}">
@@ -134,23 +159,21 @@
                         <div
                           class="btn btn-xs text-dark-70 bg-orange-40 me-5 font-size-sm fw-normal py-2 subcurriculum-link"
                           data-content="{{ $subcurriculum->content }}">
-                          Link YouTube
+                          Video
                         </div>
                       @else
                         <div class="btn btn-xs btn-blue-soft me-5 font-size-sm fw-normal py-2 subcurriculum-link"
                           data-content="{{ $subcurriculum->content }}">
-                          Document
+                          Dokumen
                         </div>
                       @endif
                       @if ($subcurriculum->finished->where('user_id', auth()->user()->id)->first())
-                        <button class="btn btn-xs btn-rounded-circle btn-secondary" disabled>
-                          <i class="fas fa-check"></i>
-                        </button>
+                        <i class="fas fa-check text-dark"></i>
                       @else
                         <form action="{{ route('guru.mycourse.subcurriculum', $course->uuid) }}" method="post">
                           @csrf
                           <input type="hidden" name="subcurriculum" value="{{ $subcurriculum->id }}">
-                          <button class="btn btn-xs btn-rounded-circle btn-success" type="submit">
+                          <button class="btn btn-xs btn-rounded-circle btn-dark" type="submit">
                             <i class="fas fa-check"></i>
                           </button>
                         </form>
@@ -162,21 +185,6 @@
             </div>
           @endforeach
 
-          @if ($course->postTest && $finished->count() == $course->subcurriculum->count() && !$postTestCheck)
-            <div class="border rounded shadow mb-6 overflow-hidden">
-              <div class="d-flex align-items-center">
-                <h5 class="mb-0 w-100">
-                  <div
-                    class="d-flex align-items-center p-5 min-height-80 text-dark fw-medium line-height-one justify-content-center">
-                    <button class="btn btn-primary btn-sm px-10"
-                      onclick="document.location.href = '{{ route('guru.mycourse.post_test', $course->uuid) }}'">
-                      Quiz Post Test
-                    </button>
-                  </div>
-                </h5>
-              </div>
-            </div>
-          @endif
         </div>
       </div>
 
@@ -209,14 +217,14 @@
           @endforeach
         </ul>
 
-        <div class="border shadow rounded p-6 p-md-9">
+        <div class="border shadow rounded p-4 p-md-6">
           <h3 class="mb-2">Tambahkan pertanyaan atau komentar terkait kursus ini</h3>
           <form action="{{ route('guru.mycourse.comment', $course->uuid) }}" method="post">
             @csrf
             <input type="hidden" name="course" value="{{ $course->id }}">
             <div class="form-group mb-6">
               <label for="curriculum">Kurikulum</label>
-              <select class="form-select" aria-label="Select example" id="curriculum" name="curriculum" required>
+              <select class="form-select " aria-label="Select example" id="curriculum" name="curriculum" required>
                 <option value="" selected hidden>Pilih</option>
                 @foreach ($course->curriculum as $curriculum)
                   <option value="{{ $curriculum->id }}">{{ $curriculum->title }}</option>
@@ -225,11 +233,12 @@
             </div>
 
             <div class="form-group mb-6">
-              <label for="content">Konten</label>
-              <textarea class="form-control placeholder-1" id="content" name="content" rows="6" placeholder="Content"></textarea>
+              <label for="content">Komentar</label>
+              <textarea class="form-control placeholder-1" id="content" name="content" rows="4"
+                placeholder="Tambahkan komentar..."></textarea>
             </div>
 
-            <button type="submit" class="btn btn-primary btn-block mw-md-300p py-3">SUBMIT</button>
+            <button type="submit" class="btn btn-sm btn-primary btn-block mw-md-300p py-3">SUBMIT</button>
           </form>
         </div>
       </div>
@@ -282,9 +291,31 @@
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script>
     $(document).ready(function() {
+      // Membuat variabel untuk menyimpan apakah ada subkurikulum yang diaktifkan
+      var activeSubcurriculum = false;
+
+      // Menambahkan event click pada subcurriculum-link
       $('.subcurriculum-link').on('click', function(event) {
         event.preventDefault();
         var content = $(this).data('content');
+        displaySubcurriculumContent(content);
+        activeSubcurriculum = true;
+      });
+
+      // Mencari subkurikulum yang sedang aktif dan menampilkannya di content-container
+      $('#accordionCurriculum .collapse.show').each(function() {
+        var subcurriculumContent = $(this).find('.subcurriculum-link').first().data('content');
+        displaySubcurriculumContent(subcurriculumContent);
+        activeSubcurriculum = true;
+      });
+
+      // Jika tidak ada subkurikulum yang diaktifkan, tampilkan konten default di content-container
+      if (!activeSubcurriculum) {
+        $('#content-container').removeClass('d-none');
+      }
+
+      // Fungsi untuk menampilkan konten subkurikulum di content-container
+      function displaySubcurriculumContent(content) {
         var contentContainer = $('#content-container');
 
         // Cek apakah konten adalah link YouTube
@@ -293,7 +324,7 @@
           var videoUrl = content;
           var videoEmbedUrl = videoUrl.replace('/watch?v=', '/embed/');
           var videoHtml = `<div class="embed-responsive embed-responsive-16by9">
-                        <iframe class="embed-responsive-item" src="${videoEmbedUrl}" style="width: 100%; height: 500px;" allowfullscreen></iframe>
+                        <iframe class="embed-responsive-item" src="${videoEmbedUrl}" style="width: 100%; height: 570px;" allowfullscreen></iframe>
                       </div>`;
           contentContainer.html(videoHtml);
         } else {
@@ -302,17 +333,39 @@
 
           // Membuat elemen iframe untuk menampilkan dokumen
           var documentHtml =
-            `<iframe src="${documentUrl}" style="width: 100%; height: 500px;"></iframe>`;
+            `<iframe src="${documentUrl}" style="width: 100%; height: 570px;"></iframe>`;
 
           // Menampilkan dokumen di dalam content-container
           contentContainer.html(documentHtml);
         }
-      });
+
+        // Menghapus kelas CSS "d-none" untuk menampilkan content-container
+        contentContainer.removeClass('d-none');
+      }
     });
   </script>
 
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
+  @if ($course->postTest && $finished->count() == $course->subcurriculum->count() && !$postTestCheck)
+    <script>
+      Swal.fire({
+        icon: 'success',
+        title: 'Materi selesai !',
+        text: 'Silahkan ikuti Post Test dengan klik tombol Quiz Post Test',
+      })
+    </script>
+  @endif
 
+  @if (Session::has('success'))
+    <script>
+      Swal.fire({
+        icon: 'success',
+        title: '{{ Session::get('success') }}',
+        text: 'Hasil Test dapat dilihat dibagian Nilai Quiz',
+      })
+    </script>
+  @endif
 
 </body>
 

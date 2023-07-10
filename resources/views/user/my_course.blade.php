@@ -1,11 +1,10 @@
 @extends('user.layouts.index')
 
-
 @section('content')
   <header class="py-4 py-md-6 overlay overlay-primary overlay-80"
     style="background-image: url(assets/img/covers/cover-19.jpg);">
     <div class="container text-start py-xl-5">
-      <h1 class="display-4 fw-semi-bold mb-0 text-white">Pembelajaran Saya</h1>
+      <h1 class="display-4 fw-semi-bold mb-0 text-white">Pembelajaran saya</h1>
     </div>
     <!-- Img -->
     <img class="d-none img-fluid" src="...html" alt="...">
@@ -13,9 +12,9 @@
 
   <section class="py-5 py-md-8 bg-white">
     <div class="container container-wd">
-      <div class="row align-items-end mb-4 mb-md-7">
-        <div class="col-md mb-4 mb-md-0">
-          <h1 class="mb-1">Kursus</h1>
+      <div class="row align-items-end mb-3 mb-md-5">
+        <div class="col-md mb-2 mb-md-0">
+          <h2 class="mb-1">Kursus</h2>
           <p class="font-size-lg mb-0 text-capitalize">Daftar kursus yang diikuti.</p>
         </div>
         <div class="col-md-auto">
@@ -28,13 +27,14 @@
         @foreach ($enrollments as $enrollment)
           <div class="col-md mb-5 mb-lg-0">
             <!-- Card -->
-            <div class="card border shadow p-2 rounded-lg lift sk-fade">
+            <div class="card border shadow p-2 lift sk-fade">
               <!-- Image -->
               <div class="card-zoom position-relative">
-                <a href="{{ route('guru.mycourse.detail', ['uuid' => $enrollment->course->uuid]) }}
-"
-                  class="card-img d-block sk-thumbnail img-ratio-3"><img class="rounded shadow-light-lg img-fluid"
-                    src="{{ asset('storage/images/course/' . $enrollment->course->image) }}" alt="..."></a>
+                <a href="{{ route('guru.mycourse.detail', ['uuid' => $enrollment->course->uuid]) }}"
+                  class="card-img d-block sk-thumbnail img-ratio-3">
+                  <img class="rounded shadow-light-lg img-fluid pt-0 mt-0"
+                    src="{{ asset('storage/images/course/' . $enrollment->course->image) }}" alt="...">
+                </a>
 
                 <a href="#"
                   class="badge sk-fade-bottom badge-lg badge-purple badge-pill badge-float bottom-0 left-0 mb-4 ms-4 px-5 me-4">
@@ -44,10 +44,15 @@
 
               <!-- Footer -->
               <div class="card-footer px-2 pb-0 pt-4">
+
+                <!-- Heading -->
+                <a href="{{ route('guru.mycourse.detail', ['uuid' => $enrollment->course->uuid]) }}" class="d-block">
+                  <h5 class="line-clamp-2 h-48 h-lg-52 fw-bold">{{ $enrollment->course->title }}</h5>
+                </a>
+
                 <ul class="nav mx-n3 mb-3">
                   <li class="nav-item px-3">
-                    <a href="{{ route('guru.mycourse.detail', ['uuid' => $enrollment->course->uuid]) }}
-"
+                    <a href="{{ route('guru.mycourse.detail', ['uuid' => $enrollment->course->uuid]) }}"
                       class="d-flex align-items-center text-gray-800">
                       <div class="me-3 d-flex">
                         <!-- Icon -->
@@ -58,12 +63,11 @@
                         </svg>
 
                       </div>
-                      <div class="font-size-sm">{{ $enrollment->course->instructor->name }}</div>
+                      <div class="font-size-sm">{{ Str::ucfirst($enrollment->course->instructor->name) }}</div>
                     </a>
                   </li>
                   <li class="nav-item px-3">
-                    <a href="{{ route('guru.mycourse.detail', ['uuid' => $enrollment->course->uuid]) }}
-"
+                    <a href="{{ route('guru.mycourse.detail', ['uuid' => $enrollment->course->uuid]) }}"
                       class="d-flex align-items-center text-gray-800">
                       <div class="me-2 d-flex">
                         <!-- Icon -->
@@ -81,11 +85,35 @@
                   </li>
                 </ul>
 
-                <!-- Heading -->
-                <a href="{{ route('guru.mycourse.detail', ['uuid' => $enrollment->course->uuid]) }}
-" class="d-block">
-                  <h5 class="line-clamp-2 h-48 h-lg-52">{{ $enrollment->course->title }}</h5>
-                </a>
+                @php
+                  $sub_curiculum = $enrollment->course->subcurriculum->count();
+                  $finished = 0;
+                  
+                  foreach ($enrollment->course->subcurriculum as $subcurriculum) {
+                      $finished += $subcurriculum->finished->count();
+                  }
+                  
+                  $persentasi = 0; // Default value
+                  
+                  if ($finished > 0) {
+                      $persentasi = ($finished / $sub_curiculum) * 100;
+                  }
+                @endphp
+
+                <div class="progress" style="height: 3px;">
+                  <div class="progress-bar" role="progressbar" style="width: {{ $persentasi }}%;"
+                    aria-valuenow="{{ $persentasi }}" aria-valuemin="0" aria-valuemax="100">
+                  </div>
+                </div>
+                <div class="text-dark font-size-sm mt-1">
+                  @if ($persentasi == '0')
+                    MULAI KURSUS
+                  @else
+                    {{ $persentasi }}% selesai
+                  @endif
+
+                </div>
+
               </div>
             </div>
           </div>
@@ -96,4 +124,18 @@
       </div>
     </div>
   </section>
+
+  @push('js')
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    @if (Session::has('success'))
+      <script>
+        Swal.fire(
+          'Berhasil!',
+          '{{ Session::get('success') }}',
+          'success'
+        )
+      </script>
+    @endif
+  @endpush
 @endsection

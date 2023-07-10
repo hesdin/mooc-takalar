@@ -52,10 +52,49 @@ class PagesController extends Controller
         return view('user.pages.course_detail');
     }
 
-    public function courseAll()
+    public function courseAll(Request $request)
     {
-        $courses = Course::has('preTest')->get();
+        // Mengambil semua kategori kursus
+        $categories = CourseCategory::all();
 
-        return view('user.pages.all_course', compact('courses'));
+        // Mendapatkan kategori yang dipilih dari input
+        $selectedCategory = $request->input('category');
+
+        // Mendapatkan kata kunci pencarian dari input
+        $search = $request->input('search');
+
+        // Mendapatkan opsi pengurutan dari input
+        $orderBy = $request->input('order_by');
+
+        // Membuat objek query builder untuk model Course
+        $query = Course::query();
+
+        // Memfilter berdasarkan kategori yang dipilih jika tidak kosong
+        if (!empty($selectedCategory)) {
+            $query->where('category_id', $selectedCategory);
+        }
+
+        // Mencari kata kunci pencarian di judul dan deskripsi jika tidak kosong
+        if (!empty($search)) {
+            $query->where(function ($q) use ($search) {
+                $q->where('title', 'LIKE', "%{$search}%")
+                    ->orWhere('description', 'LIKE', "%{$search}%");
+            });
+        }
+
+        // Mengurutkan berdasarkan opsi pengurutan yang dipilih jika tidak kosong
+        if (!empty($orderBy)) {
+            if ($orderBy === 'terbaru') {
+                $query->orderBy('created_at', 'desc');
+            } elseif ($orderBy === 'terpopuler') {
+                // Menghitung jumlah pendaftaran pada setiap kursus
+                $query->withCount('enrollment')->orderBy('enrollment_count', 'desc');
+            }
+        }
+
+        // Menjalankan query dan mendapatkan hasil kursus
+        $courses = $query->get();
+
+        return view('user.pages.all_course', compact('categories', 'courses', 'selectedCategory', 'search', 'orderBy'));
     }
 }

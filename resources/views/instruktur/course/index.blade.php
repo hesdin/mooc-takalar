@@ -66,7 +66,7 @@
             <thead>
               <tr class="fw-bold fs-6 text-muted">
                 <th>#</th>
-                <th>Kursus</th>
+                <th>Kursus Saya</th>
                 <th>Kategori</th>
                 <th>Created At</th>
                 <th class="text-end">Actions</th>
@@ -79,9 +79,10 @@
                   <td class="d-flex align-items-center">
                     <!--begin:: Thumbnail -->
                     <a href="{{ route('instruktur.courses.curriculum.index', ['course' => $course->id]) }}">
-                      <div class="symbol symbol-65px me-5 symbol-square">
-                        <img src="{{ asset('storage/images/course/' . $course->image) }}" alt="{{ $course->name }}"
-                          class="w-100">
+                      <div class="symbol symbol-60px symbol-2by3 me-4">
+                        <div class="symbol-label"
+                          style="background-image: url('{{ asset('storage/images/course/' . $course->image) }}')">
+                        </div>
                       </div>
                     </a>
                     <!--end::Thumbnail-->
