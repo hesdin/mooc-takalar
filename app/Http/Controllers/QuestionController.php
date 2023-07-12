@@ -37,9 +37,30 @@ class QuestionController extends Controller
         return redirect()->back()->with('success', 'Pertanyaan berhasil disimpan');
     }
 
+    public function update(Request $request, $id)
+    {
+
+        $question = Question::findOrFail($id);
+        $question->question_text = $request->question;
+        $question->update();
+
+        $correctChoice = $question->correctAnswer;
+        $correctChoice->choice_text = $request->correct;
+        $correctChoice->update();
+
+        foreach ($request->input('answer') as $choiceId => $choiceText) {
+            $choice = AnswerChoice::findOrFail($choiceId);
+            $choice->choice_text = $choiceText;
+            $choice->update();
+        }
+
+        return redirect()->back()->with('success', 'Pertanyaan berhasil diubah');
+    }
+
     public function destroy(Request $request)
     {
         $pertanyaan = Question::find($request->id);
+
         $pertanyaan->delete();
 
         return redirect()->back()->with('success', 'Pertanyaan berhasil dihapus');

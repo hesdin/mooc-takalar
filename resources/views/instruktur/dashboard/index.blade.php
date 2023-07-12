@@ -1,6 +1,5 @@
 @extends('app.index')
 
-
 @section('content')
   <div class="container-fluid" id="kt_content_container">
     <!--begin::Row-->
@@ -1761,12 +1760,11 @@
                   <span class="svg-icon svg-icon-4 me-1">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                       fill="none">
-                      <path opacity="0.3"
-                        d="M22 12C22 17.5 17.5 22 12 22C6.5 22 2 17.5 2 12C2 6.5 6.5 2 12 2C17.5 2 22 6.5 22 12ZM12 7C10.3 7 9 8.3 9 10C9 11.7 10.3 13 12 13C13.7 13 15 11.7 15 10C15 8.3 13.7 7 12 7Z"
-                        fill="black"></path>
                       <path
-                        d="M12 22C14.6 22 17 21 18.7 19.4C17.9 16.9 15.2 15 12 15C8.8 15 6.09999 16.9 5.29999 19.4C6.99999 21 9.4 22 12 22Z"
-                        fill="black"></path>
+                        d="M6.28548 15.0861C7.34369 13.1814 9.35142 12 11.5304 12H12.4696C14.6486 12 16.6563 13.1814 17.7145 15.0861L19.3493 18.0287C20.0899 19.3618 19.1259 21 17.601 21H6.39903C4.87406 21 3.91012 19.3618 4.65071 18.0287L6.28548 15.0861Z"
+                        fill="black" />
+                      <rect opacity="0.3" x="8" y="3" width="8" height="8"
+                        rx="4" fill="black" />
                     </svg>
                   </span>
                   <!--end::Svg Icon-->{{ Str::ucfirst(Auth::guard('instruktur')->user()->username) }}
@@ -1776,12 +1774,10 @@
                   <span class="svg-icon svg-icon-4 me-1">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                       fill="none">
+                      <path d="M22 7H2V11H22V7Z" fill="black" />
                       <path opacity="0.3"
-                        d="M18.0624 15.3453L13.1624 20.7453C12.5624 21.4453 11.5624 21.4453 10.9624 20.7453L6.06242 15.3453C4.56242 13.6453 3.76242 11.4453 4.06242 8.94534C4.56242 5.34534 7.46242 2.44534 11.0624 2.04534C15.8624 1.54534 19.9624 5.24534 19.9624 9.94534C20.0624 12.0453 19.2624 13.9453 18.0624 15.3453Z"
-                        fill="black"></path>
-                      <path
-                        d="M12.0624 13.0453C13.7193 13.0453 15.0624 11.7022 15.0624 10.0453C15.0624 8.38849 13.7193 7.04535 12.0624 7.04535C10.4056 7.04535 9.06241 8.38849 9.06241 10.0453C9.06241 11.7022 10.4056 13.0453 12.0624 13.0453Z"
-                        fill="black"></path>
+                        d="M21 19H3C2.4 19 2 18.6 2 18V6C2 5.4 2.4 5 3 5H21C21.6 5 22 5.4 22 6V18C22 18.6 21.6 19 21 19ZM14 14C14 13.4 13.6 13 13 13H5C4.4 13 4 13.4 4 14C4 14.6 4.4 15 5 15H13C13.6 15 14 14.6 14 14ZM16 15.5C16 16.3 16.7 17 17.5 17H18.5C19.3 17 20 16.3 20 15.5C20 14.7 19.3 14 18.5 14H17.5C16.7 14 16 14.7 16 15.5Z"
+                        fill="black" />
                     </svg>
                   </span>
                   <!--end::Svg Icon-->{{ Auth::guard('instruktur')->user()->expertise }}
@@ -1792,11 +1788,11 @@
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                       fill="none">
                       <path opacity="0.3"
-                        d="M21 19H3C2.4 19 2 18.6 2 18V6C2 5.4 2.4 5 3 5H21C21.6 5 22 5.4 22 6V18C22 18.6 21.6 19 21 19Z"
-                        fill="black"></path>
+                        d="M2 4V16C2 16.6 2.4 17 3 17H13L16.6 20.6C17.1 21.1 18 20.8 18 20V17H21C21.6 17 22 16.6 22 16V4C22 3.4 21.6 3 21 3H3C2.4 3 2 3.4 2 4Z"
+                        fill="black" />
                       <path
-                        d="M21 5H2.99999C2.69999 5 2.49999 5.10005 2.29999 5.30005L11.2 13.3C11.7 13.7 12.4 13.7 12.8 13.3L21.7 5.30005C21.5 5.10005 21.3 5 21 5Z"
-                        fill="black"></path>
+                        d="M18 9H6C5.4 9 5 8.6 5 8C5 7.4 5.4 7 6 7H18C18.6 7 19 7.4 19 8C19 8.6 18.6 9 18 9ZM16 12C16 11.4 15.6 11 15 11H6C5.4 11 5 11.4 5 12C5 12.6 5.4 13 6 13H15C15.6 13 16 12.6 16 12Z"
+                        fill="black" />
                     </svg>
                   </span>
                   <!--end::Svg Icon-->Pengajar
@@ -1893,10 +1889,7 @@
                             <span class="text-dark fw-bolder text-hover-primary fs-6">{{ $gtk->enrollments->count() }}
                               kursus diikuti</span>
                           </div>
-                          <div class="progress h-6px w-100">
-                            <div class="progress-bar bg-primary" role="progressbar" style="width: 50%"
-                              aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
-                          </div>
+
                         </div>
                       </td>
 

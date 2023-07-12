@@ -88,7 +88,13 @@ class PreTestController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+
+        $quiz = Quiz::findOrFail($id);
+        $quiz->title = $request->title;
+
+        $quiz->update();
+
+        return redirect()->back()->with('success', 'Quiz berhasil diupdate!');
     }
 
     /**
@@ -104,6 +110,4 @@ class PreTestController extends Controller
 
         return redirect()->back()->with('success', 'Quiz berhasil dihapus');
     }
-
-
 }

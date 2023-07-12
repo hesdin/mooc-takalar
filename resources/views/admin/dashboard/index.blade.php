@@ -107,7 +107,7 @@
               <!--begin::Card title-->
               <div class="card-title flex-column">
                 <h3 class="fw-bolder mb-1">Instruktur</h3>
-                <div class="fs-7 text-gray-800">Instruktur dengan Course teratas</div>
+                <div class="fs-7 text-gray-800">Instruktur dengan kursus teratas</div>
               </div>
               <!--begin::Card title-->
             </div>
@@ -119,7 +119,7 @@
                   <tr class="fw-bold fs-6 text-muted">
                     <th>Nama Instruktur</th>
                     <th>Keahlian</th>
-                    <th>Total Course</th>
+                    <th>Total Kursus</th>
 
                   </tr>
                 </thead>

@@ -29,7 +29,8 @@
                 </svg>
               </span>
               <!--end::Svg Icon-->
-              <input type="text" class="form-control form-control-solid w-250px ps-14" placeholder="Search">
+              <input type="text" id="searchInput" class="form-control form-control-solid w-250px ps-14"
+                placeholder="Search">
             </div>
             <!--end::Search-->
           </div>
@@ -50,7 +51,7 @@
                     </rect>
                   </svg>
                 </span>
-                <!--end::Svg Icon-->Add Instructor
+                <!--end::Svg Icon-->Tambah Instruktur
               </button>
               <!--end::Add user-->
             </div>
@@ -66,10 +67,10 @@
             <thead>
               <tr class="fw-bold fs-6 text-muted">
                 <th>ID</th>
-                <th>Instructor</th>
-                <th>Expertise</th>
-                <th>Joined Date</th>
-                <th class="text-end">Actions</th>
+                <th>Instruktur</th>
+                <th>Keahlian</th>
+                <th>Tanggal Bergabung</th>
+                <th class="text-end">Aksi</th>
               </tr>
             </thead>
             <tbody>
@@ -97,10 +98,10 @@
                   </td>
 
                   <td>{{ Str::ucfirst($instructor->expertise) }}</td>
-                  <td>{{ $instructor->created_at }}</td>
+                  <td>{{ $instructor->created_at->format('d, M Y') }}</td>
                   <td class="text-end">
                     <a href="#" class="btn btn-light btn-active-light-primary btn-sm" data-kt-menu-trigger="click"
-                      data-kt-menu-placement="bottom-end">Actions
+                      data-kt-menu-placement="bottom-end">Aksi
                       <!--begin::Svg Icon | path: icons/duotune/arrows/arr072.svg-->
                       <span class="svg-icon svg-icon-5 m-0">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
@@ -149,12 +150,12 @@
     <!--end::Container-->
   </div>
 
-  {{-- Create Modals --}}
+  {{-- Add Modal --}}
   <div class="modal fade" tabindex="-1" id="add_course_category">
     <div class="modal-dialog modal-dialog-centered mw-650px">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title">Add Instructor</h5>
+          <h5 class="modal-title">Tambah Instruktur</h5>
 
           <!--begin::Close-->
           <div class="btn btn-icon btn-sm btn-active-light-primary ms-2" data-bs-dismiss="modal" aria-label="Close">
@@ -173,27 +174,35 @@
           <div class="modal-body">
             @csrf
             <div class="form-group mb-6">
-              <label for="create_name" class="required">Name:</label>
-              <input type="text" class="form-control" id="create_name" name="name" placeholder="Name" required>
+              <label for="create_name" class="required">Nama Lengkap:</label>
+              <input type="text" class="form-control" id="create_name" name="name" placeholder="Nama Lengkap"
+                required>
             </div>
             <div class="form-group mb-6">
               <label for="create_username" class="required">Username:</label>
               <input type="text" class="form-control" id="create_username" name="username" placeholder="Username"
                 required>
             </div>
+
             <div class="form-group mb-6">
               <label for="create_password" class="required">Password:</label>
-              <input type="password" class="form-control" id="create_password" name="password" placeholder="Password"
-                required>
+              <div class="input-group">
+                <input type="password" class="form-control" id="create_password" name="password"
+                  placeholder="Password" required>
+                <button class="btn btn-secondary" type="button" id="togglePassword">
+                  <i id="passwordIcon" class="fas fa-eye-slash"></i>
+                </button>
+              </div>
             </div>
+
             <div class="form-group mb-6">
               <label for="create_bio">Bio:</label>
-              <textarea class="form-control" id="create_bio" name="bio" placeholder="Bio"></textarea>
+              <textarea class="form-control" id="create_bio" name="bio" placeholder="Bio" rows="5"></textarea>
             </div>
             <div class="form-group mb-6">
-              <label for="create_expertise" class="required">Expertise:</label>
+              <label for="create_expertise" class="required">Keahlian:</label>
               <input type="text" class="form-control" id="create_expertise" name="expertise"
-                placeholder="Expertise" required>
+                placeholder="Keahlian" required>
             </div>
             <div class="form-group mb-6">
               <label for="create_image">Image:</label>
@@ -211,14 +220,14 @@
     </div>
   </div>
 
-  <!-- Edit Modals -->
+  <!-- Edit Modal -->
   @foreach ($instructors as $instructor)
     <div class="modal fade" id="editModal{{ $instructor->id }}" tabindex="-1" role="dialog"
       aria-labelledby="editModal{{ $instructor->id }}Label" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered mw-650px" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="editModal{{ $instructor->id }}Label">Edit Instructor</h5>
+            <h5 class="modal-title" id="editModal{{ $instructor->id }}Label">Edit Data Instruktur</h5>
             <!--begin::Close-->
             <div class="btn btn-icon btn-sm btn-active-light-primary ms-2" data-bs-dismiss="modal" aria-label="Close">
               <span class="svg-icon svg-icon-muted svg-icon-2hx"><svg xmlns="http://www.w3.org/2000/svg" width="24"
@@ -238,7 +247,7 @@
             @method('PUT')
             <div class="modal-body">
               <div class="form-group mb-6">
-                <label class="required" for="edit_name{{ $instructor->id }}">Name:</label>
+                <label class="required" for="edit_name{{ $instructor->id }}">Nama Lengkap:</label>
                 <input type="text" class="form-control" id="edit_name{{ $instructor->id }}" name="name"
                   value="{{ $instructor->name }}" required>
               </div>
@@ -250,21 +259,21 @@
               <div class="form-group mb-6">
                 <label class="required" for="edit_password{{ $instructor->id }}">Password:</label>
                 <input type="password" class="form-control" id="edit_password{{ $instructor->id }}" name="password"
-                  placeholder="Leave blank to keep the current password">
+                  placeholder="Biarkan kosong jika tidak mengganti sandi">
               </div>
               <div class="form-group mb-6">
                 <label class="" for="edit_bio{{ $instructor->id }}">Bio:</label>
-                <textarea class="form-control" rows="3" id="edit_bio{{ $instructor->id }}" name="bio" placeholder="Bio">{{ $instructor->bio }}</textarea>
+                <textarea class="form-control" rows="5" id="edit_bio{{ $instructor->id }}" name="bio" placeholder="Bio">{{ $instructor->bio }}</textarea>
               </div>
               <div class="form-group mb-6">
-                <label class="required" for="edit_expertise{{ $instructor->id }}">Expertise:</label>
+                <label class="required" for="edit_expertise{{ $instructor->id }}">Keahlian:</label>
                 <input type="text" class="form-control" id="edit_expertise{{ $instructor->id }}" name="expertise"
                   value="{{ $instructor->expertise }}" required>
               </div>
               <div class="mb-3">
-                <label for="edit_image{{ $instructor->id }}" class="form-label">Old Image:</label>
+                <label for="edit_image{{ $instructor->id }}" class="form-label">Image Lama:</label>
                 <br>
-                <img src="{{ asset('storage/images/' . $instructor->image) }}" alt="Old Image"
+                <img src="{{ asset('storage/images/' . $instructor->image) }}" alt="Image Lama"
                   class="img-thumbnail mb-3" style="max-width: 100px;">
                 <div class="d-flex align-items-center">
                   <input type="file" class="form-control" id="edit_image{{ $instructor->id }}" name="image">
@@ -288,8 +297,29 @@
   <script src="{{ asset('assets/plugins/custom/datatables/datatables.bundle.js') }}"></script>
   <!--end::Page Custom Javascript-->
   <script>
-    document.addEventListener("DOMContentLoaded", function() {
-      $("#kt_datatable_example_1").DataTable();
+    $(document).ready(function() {
+
+      var table = $('#kt_datatable_example_1').DataTable({
+        searching: true, // Mengaktifkan pencarian
+      });
+
+      $('#searchInput').on('keyup', function() {
+        table.search(this.value).draw();
+      });
+
+      $('#togglePassword').click(function() {
+        var passwordInput = $('#create_password');
+        var passwordIcon = $('#passwordIcon');
+
+        if (passwordInput.attr('type') === 'password') {
+          passwordInput.attr('type', 'text');
+          passwordIcon.removeClass('fa-eye-slash').addClass('fa-eye');
+        } else {
+          passwordInput.attr('type', 'password');
+          passwordIcon.removeClass('fa-eye').addClass('fa-eye-slash');
+        }
+      });
+
     });
   </script>
 
@@ -316,12 +346,12 @@
       event.preventDefault();
 
       Swal.fire({
-          html: `Are you sure you want to delete <strong>${name}</strong> ?`,
+          html: `Yakin ingin menghapus <strong>${name}</strong> ?`,
           icon: "warning",
           buttonsStyling: false,
           showCancelButton: true,
-          confirmButtonText: "Ok, got it!",
-          cancelButtonText: 'Nope, cancel it',
+          confirmButtonText: "Ok, mengerti!",
+          cancelButtonText: 'Tidak, batalkan',
           customClass: {
             confirmButton: "btn btn-primary",
             cancelButton: 'btn btn-danger'

@@ -29,7 +29,8 @@
                 </svg>
               </span>
               <!--end::Svg Icon-->
-              <input type="text" class="form-control form-control-solid w-250px ps-14" placeholder="Search">
+              <input type="text" id="searchInput" class="form-control form-control-solid w-250px ps-14"
+                placeholder="Search">
             </div>
             <!--end::Search-->
           </div>
@@ -50,7 +51,7 @@
                     </rect>
                   </svg>
                 </span>
-                <!--end::Svg Icon-->Add Course
+                <!--end::Svg Icon-->Tambah Kursus
               </a>
               <!--end::Add user-->
             </div>
@@ -68,8 +69,8 @@
                 <th>#</th>
                 <th>Kursus Saya</th>
                 <th>Kategori</th>
-                <th>Created At</th>
-                <th class="text-end">Actions</th>
+                <th>Waktu Dibuat</th>
+                <th class="text-end">Aksi</th>
               </tr>
             </thead>
             <tbody>
@@ -285,8 +286,14 @@
   <script src="{{ asset('assets/plugins/custom/datatables/datatables.bundle.js') }}"></script>
   <!--end::Page Custom Javascript-->
   <script>
-    document.addEventListener("DOMContentLoaded", function() {
-      $("#kt_datatable_example_1").DataTable();
+    $(document).ready(function() {
+      var table = $('#kt_datatable_example_1').DataTable({
+        searching: true, // Mengaktifkan pencarian
+      });
+
+      $('#searchInput').on('keyup', function() {
+        table.search(this.value).draw();
+      });
     });
   </script>
 
