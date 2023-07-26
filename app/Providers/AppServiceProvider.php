@@ -3,6 +3,8 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\File;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -13,7 +15,12 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->bind(Filesystem::class, CustomFilesystem::class);
+        if (!function_exists('symlink')) {
+            // Fallback for systems without symlink support (e.g., Windows)
+            Storage::macro('link', function ($target, $link) {
+                return File::copy($target, $link);
+            });
+        }
     }
 
     /**
