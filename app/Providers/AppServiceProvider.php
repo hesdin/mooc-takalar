@@ -15,12 +15,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        if (!function_exists('symlink')) {
-            // Fallback for systems without symlink support (e.g., Windows)
-            Storage::macro('link', function ($target, $link) {
-                return File::copy($target, $link);
-            });
-        }
+        //
     }
 
     /**
