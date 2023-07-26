@@ -11,7 +11,7 @@ use App\Http\Controllers\EnrollController;
 use App\Http\Controllers\GuruDashboardController;
 use App\Http\Controllers\InstrukturDashboardController;
 use App\Http\Controllers\MyCourseController;
-use App\Http\Controllers\PagesController;
+use App\Http\Controllers\PageController;
 use App\Http\Controllers\PostTestController;
 use App\Http\Controllers\PreTestController;
 use App\Http\Controllers\QuestionController;
@@ -30,9 +30,9 @@ use App\Http\Controllers\SubCurriculumController;
 
 
 // User
-Route::get('/', [PagesController::class, 'home'])->name('home');
-Route::get('/course-detail/{uuid}', [PagesController::class, 'courseDetail'])->name('course.detail');
-Route::get('/course-all', [PagesController::class, 'courseAll'])->name('course.all');
+Route::get('/', [PageController::class, 'home'])->name('home');
+Route::get('/course-detail/{uuid}', [PageController::class, 'courseDetail'])->name('course.detail');
+Route::get('/course-all', [PageController::class, 'courseAll'])->name('course.all');
 
 
 Route::get('/login', [AuthController::class, 'login'])->name('login');

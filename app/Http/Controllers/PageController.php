@@ -7,7 +7,7 @@ use App\Models\CourseCategory;
 use App\Models\Instructor;
 use Illuminate\Http\Request;
 
-class PagesController extends Controller
+class PageController extends Controller
 {
     public function home()
     {
